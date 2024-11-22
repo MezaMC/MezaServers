@@ -1,13 +1,13 @@
 import Server from "~/server/models/Server";
 import {pingJava} from "@minescope/mineping";
-import exp from "node:constants";
+import {toVersion} from "~/utils/protocolConverter";
 
 export interface ServerData {
     status: "active" | "frozen" | "maintenance" | "pending",
     online?: boolean
     ip: string
     port?: number
-    protocol?: number,
+    version?: string,
     favicon?: string,
     players?: {
         online?: number
@@ -22,8 +22,7 @@ export interface ServerData {
     stars?: string[]
 }
 
-export default defineNitroPlugin((nitroApp) => {
-
+async function pingServers() {
     const storage = useStorage("servers")
 
     Server.find().then(data => {
@@ -44,7 +43,7 @@ export default defineNitroPlugin((nitroApp) => {
             if (data.status === "active") {
                 await pingJava(ip, { port }).then( resp => {
                     data.online = true
-                    data.protocol = resp.version.protocol
+                    data.version = toVersion(resp.version.protocol)
                     data.favicon = resp.favicon
                     data.players = {online: resp.players.online, max: resp.players.max}
                     console.log(`Server ${name} is online`)
@@ -60,6 +59,11 @@ export default defineNitroPlugin((nitroApp) => {
     }).catch(() => {
         console.error("Database issue")
     })
+}
+
+export default defineNitroPlugin((nitroApp) => {
+
+    pingServers()
 
     // setInterval(() => {
     //

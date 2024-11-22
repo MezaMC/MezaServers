@@ -1,5 +1,3 @@
-import {pingJava} from "@minescope/mineping";
-
 export default defineEventHandler(async (event) => {
 
     const server = event.context.params?.server

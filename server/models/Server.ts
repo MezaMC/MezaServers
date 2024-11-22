@@ -26,6 +26,6 @@ const ServerSchema = new mongoose.Schema({
         type: String,
         enum: ["active", "maintenance", "frozen", "pending"]
     }
-});
+}, { collection: 'servers' });
 
 export default mongoose.model('Server', ServerSchema);
