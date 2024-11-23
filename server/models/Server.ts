@@ -19,7 +19,7 @@ const ServerSchema = new mongoose.Schema({
         site: String
     },
     stars: {
-        type: [String],
+        type: [Number],
         required: false
     },
     status: {

@@ -19,7 +19,7 @@ export interface ServerData {
         youtube?: string | null,
         site?: string | null
     },
-    stars?: string[]
+    stars?: number[]
 }
 
 async function pingServers() {
