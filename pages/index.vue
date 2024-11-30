@@ -1,6 +1,8 @@
-<script setup lang="ts">
+<script setup lang="ts" xmlns="http://www.w3.org/1999/html">
 
 import ServerCard from "~/components/ServerCard.vue";
+import UButton from "~/components/ui/UButton.vue";
+import UDropdown from "~/components/ui/UDropdown.vue";
 
 const { data } = await useFetch('/api/servers')
 const { loggedIn, user, clear } = useUserSession()
@@ -28,17 +30,11 @@ async function refetch() {
     />
   </div>
 
-  <UButton
-      v-if="!loggedIn"
-      to="/auth/github"
-      icon="i-simple-icons-github"
-      label="Login with GitHub"
-      color="black"
-      size="xs"
-      external
-  />
-  <div v-if="user">{{ user }}</div>
-  <UButton @click="clear" label="logout" />
+<!--  <div class="flex flex-row gap-4">-->
+<!--    <UButton icon="lucide:star-off" type="outline" class="important-bg-transparent">Test button!</UButton>-->
+<!--    <UButton type="outline" icon="lucide:star">Outline with icon</UButton>-->
+
+<!--  </div>-->
 </template>
 
 <style scoped>

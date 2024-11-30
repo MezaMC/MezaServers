@@ -3,9 +3,30 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
 
-  modules: ['@unocss/nuxt', '@nuxt/ui', 'nuxt-lucide-icons', 'nuxt-auth-utils'],
+  ssr: false,
+
+  modules: ['@unocss/nuxt', 'nuxt-auth-utils', '@nuxtjs/color-mode', '@nuxt/icon'],
 
   // Fix warning about scss
-  vite: { css: { preprocessorOptions: { scss: { api: 'modern-compiler' } } } }
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: 'modern-compiler'
+        }
+      }
+    }
+  },
+
+  colorMode: {
+    preference: 'system',
+    fallback: 'dark',
+    classSuffix: '-mode',
+    storage: 'localStorage'
+  },
+
+  icon: {
+    componentName: 'NuxtIcon'
+  }
 
 })

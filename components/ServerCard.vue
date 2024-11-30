@@ -1,7 +1,9 @@
 <script setup lang="ts">
 
 import type {ServerData} from "~/server/plugins/ping";
-const emit = defineEmits();
+import {toast} from "vue-sonner";
+import UButton from "~/components/ui/UButton.vue";
+const emit = defineEmits(['updateStars']);
 
 const props = defineProps<{
   data: ServerData
@@ -10,12 +12,17 @@ const props = defineProps<{
 }>()
 
 async function starRequest(act: "add" | "remove") {
-  const resp = await $fetch(`api/server/${props.name}/star`, {
+  const resp: any = await $fetch(`api/server/${props.name}/star`, {
     method: 'post',
     body: { act }
   })
-  console.log(resp)
-  emit('update-stars')
+  if (resp.resp !== "ok") return
+  if (act == 'add') {
+    toast.success(`Вы поставили звезду серверу ${props.name}`)
+  } else {
+    toast.success(`Вы убрали звезду у сервера ${props.name}`)
+  }
+  emit('updateStars')
 
 }
 
@@ -25,8 +32,10 @@ async function starRequest(act: "add" | "remove") {
 
   <h2>{{name}}</h2>
   <pre>{{data}}</pre>
-  <UButton icon="lucide:star-off" label="remove star" v-if="viewerId && data.stars?.includes(viewerId)" @click="starRequest('remove')" />
-  <UButton icon="lucide:star" label="add star" v-else @click="starRequest('add')" />
+  <template v-if="viewerId">
+    <UButton icon="tabler:star-filled" v-if="viewerId && data.stars?.includes(viewerId)" @click="starRequest('remove')" type="outline"> {{ data.stars.length }} </UButton>
+    <UButton icon="tabler:star" v-else @click="starRequest('add')" type="outline"> {{ data.stars.length }} </UButton>
+  </template>
 
 </template>
 

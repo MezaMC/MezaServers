@@ -32,5 +32,5 @@ export default defineEventHandler(async (event) => {
     }
 
     await serverEntry.save()
-    return {"ok": "sucess"}
+    return {"resp": "ok"}
 })

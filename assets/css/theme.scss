@@ -1,0 +1,32 @@
+:root {
+  --c-brand: #018a6a;
+  --c-brand-3i: 1, 138, 106;
+
+  --c-bg-body: #e7e7e8;
+  --c-bg-main: #dbdbdd;
+  --c-bg-card: #dededf;
+
+  --c-text-secondary: #434343;
+  --c-text-primary: #303030;
+  --c-text-contrast: #000000;
+
+  --c-sep: rgba(29, 30, 32, 0.15);
+  --c-shadow: rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode {
+  --c-brand: #a7e1cb;
+  --c-brand-3i: 167, 255, 204;
+
+  --c-bg-body: #0C0C10;
+  --c-bg-main: #131318;
+  --c-bg-card: #191922;
+
+  --c-text-secondary: #9e9e9e;
+  --c-text-primary: #cacaca;
+  --c-text-contrast: #ffffff;
+
+  --c-sep: #2e2e3a;
+  --c-shadow: rgba(0, 0, 0, 0.7);
+}
+
