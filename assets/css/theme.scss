@@ -1,16 +1,17 @@
 :root {
-  --c-brand: #018a6a;
-  --c-brand-3i: 1, 138, 106;
+  --c-brand: #42B883;
+  --c-brand-3i: 66, 184, 131;
 
-  --c-bg-body: #e7e7e8;
-  --c-bg-main: #dbdbdd;
-  --c-bg-card: #dededf;
+  --c-bg-body: #FFFFFF;
+  --c-bg-main: #f5f6f8;
+  --c-bg-card: #e8e9ec;
 
   --c-text-secondary: #434343;
   --c-text-primary: #303030;
   --c-text-contrast: #000000;
 
-  --c-sep: rgba(29, 30, 32, 0.15);
+  --c-sep: rgba(29, 30, 32, 0.28);
+  --c-sep-accent: rgba(57, 57, 62, 0.7);
   --c-shadow: rgba(0, 0, 0, 0.1);
 }
 
@@ -27,6 +28,7 @@
   --c-text-contrast: #ffffff;
 
   --c-sep: #2e2e3a;
+  --c-sep-accent: #545467;
   --c-shadow: rgba(0, 0, 0, 0.7);
 }
 

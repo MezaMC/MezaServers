@@ -9,7 +9,7 @@ export default defineNitroPlugin(() => {
         mongoose.connect(mongoURI).then(() => {
             console.log('Connected to MongoDB');
         }).catch(() => {
-            console.log('Not connected to MongoDB');
+            console.error('Not connected to MongoDB');
         });
     }
 });

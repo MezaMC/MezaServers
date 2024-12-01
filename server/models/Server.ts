@@ -11,6 +11,7 @@ const ServerSchema = new mongoose.Schema({
         name: String,
         motds: [String],
         desc: String,
+        favicon: String
     },
     links: {
         youtube: String,

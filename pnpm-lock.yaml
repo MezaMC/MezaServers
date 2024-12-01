@@ -39,6 +39,9 @@ importers:
       '@iconify-json/lucide':
         specifier: ^1.2.15
         version: 1.2.15
+      '@iconify-json/tabler':
+        specifier: ^1.2.9
+        version: 1.2.9
       '@unocss/nuxt':
         specifier: ^0.64.1
         version: 0.64.1(magicast@0.3.5)(postcss@8.4.49)(rollup@4.27.3)(vite@5.4.11(@types/node@22.9.1)(sass@1.81.0)(terser@5.36.0))(vue@3.5.13(typescript@5.6.3))(webpack@5.96.1(esbuild@0.21.5))
@@ -651,6 +654,9 @@ packages:
 
   '@iconify-json/lucide@1.2.15':
     resolution: {integrity: sha512-mbHlTJRqOrqRk8E8xnpPzqZwCqsKNB9ZyITqDEYEtePEGxki9VJWJMU8JcNqRKDfPS9vlFsjwepUuOGgusmZUA==}
+
+  '@iconify-json/tabler@1.2.9':
+    resolution: {integrity: sha512-Noow/mRnLx2IKM6Wey5ondTGhRA2jySA3Au36GD2phxuBscvJNPE+F14rxYJoC65QmxSyEpKeF2U00JpR5Qx1Q==}
 
   '@iconify/collections@1.0.486':
     resolution: {integrity: sha512-E/xw5Vku+QD/eHa89W6FYSIf+ljqiBOTSAZ+dg0dCg7Wj65qZoxfp/LJBC6EZV4J2jfPS3PVOFfyxqiK4iYrkg==}
@@ -4187,6 +4193,10 @@ snapshots:
     optional: true
 
   '@iconify-json/lucide@1.2.15':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/tabler@1.2.9':
     dependencies:
       '@iconify/types': 2.0.0
 

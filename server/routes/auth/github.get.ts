@@ -2,8 +2,7 @@ export default defineOAuthGitHubEventHandler({
     config: {
 
     },
-    async onSuccess(event, { user, tokens }) {
-        console.log(user.username);
+    async onSuccess(event, { user }) {
         await setUserSession(event, { user: { login: user.login, id: user.id } });
         return sendRedirect(event, "/");
     },

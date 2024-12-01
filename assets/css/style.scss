@@ -20,3 +20,23 @@ body {
 pre code {
   font-family: "JetBrains Mono", monospace;
 }
+
+hr {
+  color: var(--c-sep);
+}
+
+a {
+  --uno: "transition";
+  color: var(--c-brand);
+  text-decoration-color: rgba(var(--c-brand-3i), 0.3);
+  &:hover {
+    filter: brightness(0.75);
+  }
+}
+
+h1 {
+  font-size: 2rem;
+  color: var(--c-text-contrast);
+  border-bottom: 1px solid var(--c-sep);
+  margin-bottom: 2rem;
+}

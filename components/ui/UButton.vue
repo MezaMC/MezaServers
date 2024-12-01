@@ -3,16 +3,18 @@ const props = defineProps<{
   to?: string
   href?: string
   icon?: string
-  type?: 'link' | 'outline' | 'solid'
+  type?: 'link' | 'outline'
   color?: string
   img?: string
+  size?: string
 }>()
 const slots = useSlots()
-const padding = slots['default'] === undefined ? "0.5rem" : "0.5rem 1rem"
-
+const padding = slots['default'] === undefined ? "0.5rem" : "0.5rem 0.8rem"
+var redirecting = false;
 function handleClick() {
-  if (props.href != undefined) {
+  if (props.href != undefined && !redirecting) {
     window.location.href = props.href
+    redirecting = true
   }
 }
 </script>
@@ -20,8 +22,7 @@ function handleClick() {
 <template>
   <div @click="handleClick()" :class="{
     'type-outline': type === 'outline',
-    'type-link': type === 'link',
-    'type-solid': (type || 'solid') === 'solid'}"
+    'type-link': (type || 'link') === 'link'}"
   >
 <!--    <client-only>-->
     <img :src="img" v-if="img" alt="img" class="w-5 h-5 rounded-full">
@@ -40,16 +41,6 @@ div {
   color: rgb(var(--color));
   transition: 150ms ease-in-out;
 }
-
-.type-solid {
-  outline: var(--c-sep) 1px solid;
-  background-color: var(--c-bg-main);
-  color: var(--c-text-primary)
-}
-
-//.content .type-solid {
-//  background-color: var(--c-bg-card);
-//}
 
 .type-outline {
   --opacity-outline: .5;

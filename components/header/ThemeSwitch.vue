@@ -10,7 +10,7 @@ const colorModeIcon = computed(() => {
     'light': 'lucide:sun',
     'dark': 'lucide:moon',
     'system': 'lucide:sun-moon'
-  }[colorMode.preference || 'dark']
+  }[colorMode.preference as string || 'dark']
   // return colorMode.value
 })
 
@@ -19,7 +19,7 @@ function switchTheme() {
     'dark': 'light',
     'light': 'system',
     'system': 'dark',
-  }[colorMode.preference] || 'dark'
+  }[colorMode.preference as string] || 'dark'
 }
 </script>
 
@@ -27,7 +27,8 @@ function switchTheme() {
   <UButton
       type="link"
       :icon="colorModeIcon" @click="switchTheme()"
-  > {{ colorMode.preference }} </UButton>
+      class="important:lt-phone:(p-l-1 p-r-1)"
+  > </UButton>
 </template>
 
 <style scoped lang="scss">

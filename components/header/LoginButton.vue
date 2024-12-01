@@ -5,8 +5,10 @@ import { ref, onMounted, onBeforeUnmount } from 'vue';
 const isOpen = ref(false);
 const toggleDropdown = () => isOpen.value = !isOpen.value;
 
-onMounted(() => document.addEventListener('click', (e) => {
-  if (!e.target.closest('.dropdown')) isOpen.value = false;
+onMounted(() => document.addEventListener('click', event => {
+  if (event.target == null) return
+  if (!(event.target instanceof Element)) return
+    if (!event.target.closest('.dropdown')) isOpen.value = false;
 }));
 onBeforeUnmount(() => document.removeEventListener('click', () => {}));
 </script>
@@ -24,8 +26,9 @@ onBeforeUnmount(() => document.removeEventListener('click', () => {}));
             type="link"
             :img="`https://avatars.githubusercontent.com/u/${user.id}?v=4`"
             @click="toggleDropdown"
+            class="important:lt-phone:(p-l-2 p-r-2)"
         >
-          {{ user.login }}
+          {{ user.login }} <NuxtIcon name="lucide:chevron-down" />
         </UButton>
       </div>
     </template>
@@ -41,7 +44,7 @@ onBeforeUnmount(() => document.removeEventListener('click', () => {}));
 }
 
 .logout-dropdown {
-  background-color: var(--c-bg-card);
+  background-color: var(--c-bg-main);
   outline: 1px solid var(--c-sep);
   border-radius: 4px;
   position: absolute;
@@ -49,6 +52,7 @@ onBeforeUnmount(() => document.removeEventListener('click', () => {}));
   right: 0;
   padding: 10px;
   z-index: 10;
+  box-shadow: var(--c-shadow) 0 0 16px;
 }
 
 .v-enter-active,

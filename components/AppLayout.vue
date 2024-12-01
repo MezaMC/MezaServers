@@ -18,7 +18,8 @@ import UHeader from "~/components/header/UHeader.vue";
 <style scoped lang="scss">
 .content {
   --margin: 2rem;
-  width: 800px;
+  max-width: 800px;
+  width: 90vw;
   min-height: calc(100vh - 2*var(--margin));
   margin: var(--margin) 0;
   --uno: "flex flex-col gap-4";
