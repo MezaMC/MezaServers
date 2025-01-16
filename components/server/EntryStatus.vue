@@ -24,6 +24,11 @@ const props = defineProps<{
       </template>
     </template>
 
+    <template v-else-if="data.status === 'maintenance'">
+      <div class="h-1.5 w-1.5 bg-blue-5 rounded shadow-blue-7 shadow-[0px_0px_5px_1px]" />
+      <span class="text-vptext-2">Технические работы</span>
+    </template>
+
     <template v-else-if="data.status === 'frozen'">
       <div class="h-1.5 w-1.5 bg-[#755858] rounded shadow-[#4a3a3a] shadow-[0px_0px_5px_1px]" />
       <span class="text-vptext-2">Сервер неактивен</span>

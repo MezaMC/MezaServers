@@ -11,5 +11,5 @@ useSeoMeta({
 <template>
   <AppLayout />
 
-  <Toaster position="bottom-right" :theme="$colorMode.value as 'dark' | 'light' | 'system'" rich-colors />
+  <Toaster position="bottom-right" theme="dark" rich-colors />
 </template>

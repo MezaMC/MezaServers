@@ -11,6 +11,7 @@ export default defineEventHandler(async (event) => {
         if (serverData == null) continue
         serverDataMap[serverName] = serverData
     }
+
     return serverDataMap
 
 

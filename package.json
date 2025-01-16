@@ -13,7 +13,6 @@
   "dependencies": {
     "@minescope/mineping": "^1.5.0",
     "@nuxt/icon": "^1.8.2",
-    "@nuxtjs/color-mode": "^3.5.2",
     "mongoose": "^8.8.2",
     "nuxt": "^3.14.1592",
     "nuxt-auth-utils": "^0.5.5",
@@ -28,6 +27,8 @@
     "@unocss/nuxt": "^0.64.1",
     "@unocss/transformer-directives": "^0.64.1",
     "@unocss/transformer-variant-group": "^0.64.1",
+    "@vueuse/core": "^12.4.0",
+    "@vueuse/nuxt": "^12.4.0",
     "sass": "^1.81.0",
     "unocss": "^0.64.1"
   }

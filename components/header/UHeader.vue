@@ -1,7 +1,6 @@
 <script setup lang="ts">
 
 import LoginButton from "~/components/header/LoginButton.vue";
-import ThemeSwitch from "~/components/header/ThemeSwitch.vue";
 </script>
 
 <template>
@@ -11,7 +10,6 @@ import ThemeSwitch from "~/components/header/ThemeSwitch.vue";
       <span>MezaServers</span>
     </nuxt-link>
     <nav class="flex items-center gap-2">
-      <ThemeSwitch />
       <LoginButton />
     </nav>
 

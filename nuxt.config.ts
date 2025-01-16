@@ -5,7 +5,7 @@ export default defineNuxtConfig({
 
   ssr: false,
 
-  modules: ['@unocss/nuxt', 'nuxt-auth-utils', '@nuxtjs/color-mode', '@nuxt/icon'],
+  modules: ['@unocss/nuxt', 'nuxt-auth-utils', '@nuxt/icon', '@vueuse/nuxt'],
 
   // Fix warning about scss
   vite: {
@@ -16,13 +16,6 @@ export default defineNuxtConfig({
         }
       }
     }
-  },
-
-  colorMode: {
-    preference: 'system',
-    fallback: 'dark',
-    classSuffix: '-mode',
-    storage: 'localStorage'
   },
 
   icon: {

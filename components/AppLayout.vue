@@ -30,7 +30,7 @@ main {
   background-color: var(--c-bg-main);
   outline: var(--c-sep) 1px solid;
   box-shadow: var(--c-shadow) 0 0 16px;
-  padding: 1rem 2rem;
   flex-grow: 1;
+  padding: 2rem;
 }
 </style>

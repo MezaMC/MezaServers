@@ -6,6 +6,7 @@ const emit = defineEmits(['updateStars']);
 const props = defineProps<{
   stars: Array<number>
   name: string
+  displayName?: string
 }>()
 
 async function starRequest(act: "add" | "remove") {
@@ -13,11 +14,14 @@ async function starRequest(act: "add" | "remove") {
     method: 'post',
     body: {act}
   })
+
   if (resp.resp !== "ok") return
+
+
   if (act == 'add') {
-    toast.success(`Вы поставили звезду серверу ${props.name}`)
+    toast.success(`Вы поставили звезду серверу ${props.displayName ?? props.name}`)
   } else {
-    toast.success(`Вы убрали звезду у сервера ${props.name}`)
+    toast.success(`Вы убрали звезду у сервера ${props.displayName ?? props.name}`)
   }
   emit('updateStars')
 }

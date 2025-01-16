@@ -27,6 +27,10 @@ const displayData: {
   site: {
     icon: 'lucide:globe',
     display: 'Сайт'
+  },
+  donate: {
+    icon: 'lucide:wallet',
+    display: 'Поддержать'
   }
 }
 

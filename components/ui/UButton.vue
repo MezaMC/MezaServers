@@ -43,17 +43,17 @@ div {
 }
 
 .type-outline {
-  --opacity-outline: .5;
-  --opacity-bg: .06;
+  --opacity-outline: .4;
+  --opacity-bg: .04;
   outline: 1px solid rgba(var(--color), var(--opacity-outline));
   background-color: rgba(var(--color), var(--opacity-bg));
   &:hover {
-    --opacity-outline: .7;
-    --opacity-bg: .1;
+    --opacity-outline: .5;
+    --opacity-bg: .08;
   }
   &:active {
-    --opacity-outline: 1;
-    --opacity-bg: .16;
+    --opacity-outline: 0.7;
+    --opacity-bg: .12;
     color: color-mix(in srgb, rgb(var(--color)), white 40%);
   }
 }

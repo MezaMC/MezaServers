@@ -6,7 +6,8 @@ export interface ServerLinks {
     discord?: string | null,
     telegram?: string | null,
     youtube?: string | null,
-    site?: string | null
+    site?: string | null,
+    donate?: string | null
 }
 
 export interface ServerData {
@@ -31,7 +32,7 @@ export interface ServerData {
 async function pingServers() {
     const storage = useStorage("servers")
 
-    return await Server.find().then(data => {
+    return await Server.find() .then(data => {
 
         data.forEach(async serverEntry => {
             if (!serverEntry.ip || !serverEntry.name) return
@@ -70,5 +71,5 @@ async function pingServers() {
 
 export default defineNitroPlugin((nitroApp) => {
     pingServers()
-    // setInterval(pingServers, 5 * 60_000)
+    setInterval(pingServers, 5 * 60_000)
 })

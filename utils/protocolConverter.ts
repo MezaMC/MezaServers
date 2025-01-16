@@ -41,7 +41,8 @@ const map: { [key: number]: string } = {
     765: "1.20.4",
     766: "1.20.6",
     767: "1.21.1",
-    768: "1.21.3"
+    768: "1.21.3",
+    769: "1.21.4"
 }
 
 export function toVersion(protocol: number): string {

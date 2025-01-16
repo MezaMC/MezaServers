@@ -14,7 +14,8 @@ const props = defineProps<{
 
     <ServerEntryTop
         :ip="serverData.ip"
-        :name="serverData.display?.name || serverName"
+        :name="serverName"
+        :displayName="serverData.display?.name || undefined"
         :img="serverData.display?.favicon || undefined"
         :stars="serverData.stars"
         @update-stars="emit('updateStars')"

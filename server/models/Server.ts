@@ -17,7 +17,8 @@ const ServerSchema = new mongoose.Schema({
         youtube: String,
         discord: String,
         telegram: String,
-        site: String
+        site: String,
+        donate: String
     },
     stars: {
         type: [Number],
