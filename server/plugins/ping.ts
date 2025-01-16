@@ -61,10 +61,10 @@ async function pingServers() {
             await storage.setItem(name, data)
         })
 
-        console.log(`Servers pinged: ${data.length}`)
+        console.log(`Servers: ${data.length}`)
 
     }).catch(() => {
-        console.error("Database issue")
+        console.error("Database issue or no servers found")
     })
 
 }

@@ -1,20 +1,31 @@
 <script setup lang="ts">
 const props = defineProps<{
-  to?: string
+  routerLink?: string
   href?: string
   icon?: string
   type?: 'link' | 'outline'
   color?: string
   img?: string
   size?: string
+  targetBlank?: boolean
 }>()
+
 const slots = useSlots()
 const padding = slots['default'] === undefined ? "0.5rem" : "0.5rem 0.8rem"
 var redirecting = false;
+
 function handleClick() {
+  if (props.routerLink != undefined) {
+    useRouter().push("/about")
+    return
+  }
   if (props.href != undefined && !redirecting) {
-    window.location.href = props.href
-    redirecting = true
+    if (props.targetBlank) {
+      window.open(props.href)
+    } else {
+      window.location.href = props.href
+      redirecting = true
+    }
   }
 }
 </script>
@@ -24,12 +35,11 @@ function handleClick() {
     'type-outline': type === 'outline',
     'type-link': (type || 'link') === 'link'}"
   >
-<!--    <client-only>-->
+
     <img :src="img" v-if="img" alt="img" class="w-5 h-5 rounded-full">
     <NuxtIcon v-if="icon" :name="icon" class="w-5 h-5" />
-<!--    </client-only>-->
-
     <slot />
+
   </div>
 </template>
 

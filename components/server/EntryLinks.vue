@@ -37,7 +37,7 @@ const displayData: {
 </script>
 
 <template>
-  <div class="flex items-center flex-wrap gap-[0.4rem_1.5rem]" v-if="links">
+  <div class="flex items-center flex-wrap gap-[0.5rem_1.25rem]" v-if="links">
     <template v-for="(link, linkName) of links">
 
       <a v-if="link" :href="link" target="_blank">

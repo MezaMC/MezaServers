@@ -22,7 +22,7 @@ import UHeader from "~/components/header/UHeader.vue";
   width: 90vw;
   min-height: calc(100vh - 2*var(--margin));
   margin: var(--margin) 0;
-  --uno: "flex flex-col gap-4";
+  --uno: "flex flex-col gap-5";
 }
 
 main {
@@ -31,6 +31,6 @@ main {
   outline: var(--c-sep) 1px solid;
   box-shadow: var(--c-shadow) 0 0 16px;
   flex-grow: 1;
-  padding: 2rem;
+  @apply "p-8 lt-phone:p-4";
 }
 </style>

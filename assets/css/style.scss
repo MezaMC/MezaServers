@@ -28,15 +28,22 @@ hr {
 a {
   --uno: "transition";
   color: var(--c-brand);
-  text-decoration-color: rgba(var(--c-brand-3i), 0.3);
+  text-decoration-color: rgba(var(--c-brand-3i), .3);
   &:hover {
-    filter: brightness(0.75);
+    filter: brightness(.8);
   }
 }
 
 h1 {
   font-size: 2rem;
   color: var(--c-text-contrast);
-  border-bottom: 1px solid var(--c-sep);
-  margin: 0 0 2rem;
+  border-bottom: 2px solid var(--c-sep);
+  margin: 0 0 1rem;
+  @apply "lt-phone:text-2xl";
+}
+
+p {
+  line-height: 28px;
+  @apply "lt-phone:line-height-[24px]";
+  margin: 0.75rem 0;
 }

@@ -17,7 +17,6 @@ async function starRequest(act: "add" | "remove") {
 
   if (resp.resp !== "ok") return
 
-
   if (act == 'add') {
     toast.success(`Вы поставили звезду серверу ${props.displayName ?? props.name}`)
   } else {
@@ -55,7 +54,6 @@ async function starRequest(act: "add" | "remove") {
       </template>
     </div>
   </AuthState>
-
 </template>
 
 <style scoped lang="scss">

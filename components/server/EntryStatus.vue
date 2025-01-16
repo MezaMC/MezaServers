@@ -16,7 +16,7 @@ const props = defineProps<{
       <div class="h-1.5 w-1.5 bg-green rounded shadow-green shadow-[0px_0px_5px_1px] " />
       <span v-if="data.players?.online !== undefined && data.players?.max !== undefined" class="flex gap-1">
         <span class="text-t-secondary">Онлайн:</span>
-        <span class="flex gap-0.5">{{ data.players.online }}<span class="text-vptext-3">/</span>{{ data.players.max }}</span>
+        <span class="flex gap-0.5">{{ data.players.online }}<span class="text-t-secondary">/</span>{{ data.players.max }}</span>
       </span>
       <template v-if="data.version !== undefined">
         <div class="w-[1px] h-4 bg-sep" />
@@ -25,18 +25,18 @@ const props = defineProps<{
     </template>
 
     <template v-else-if="data.status === 'maintenance'">
-      <div class="h-1.5 w-1.5 bg-blue-5 rounded shadow-blue-7 shadow-[0px_0px_5px_1px]" />
-      <span class="text-vptext-2">Технические работы</span>
+      <div class="h-1.5 w-1.5 bg-blue-5 rounded shadow-blue-6 shadow-[0px_0px_5px_1px]" />
+      <span class="text-t-secondary">Технические работы</span>
     </template>
 
     <template v-else-if="data.status === 'frozen'">
-      <div class="h-1.5 w-1.5 bg-[#755858] rounded shadow-[#4a3a3a] shadow-[0px_0px_5px_1px]" />
-      <span class="text-vptext-2">Сервер неактивен</span>
+      <div class="h-1.5 w-1.5 bg-gray-5 rounded shadow-gray-6 shadow-[0px_0px_5px_1px]" />
+      <span class="text-t-secondary">Временно заморожен</span>
     </template>
 
     <template v-else class="status-bar">
       <div class="h-1.5 w-1.5 bg-red-6 rounded shadow-red-6 shadow-[0px_0px_5px_1px]" />
-      <span class="text-vptext-2">Сервер выключен</span>
+      <span class="text-t-secondary">Выключен</span>
     </template>
 
   </div>
