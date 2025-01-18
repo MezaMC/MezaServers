@@ -24,7 +24,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     MONGODB_URI: process.env.MONGODB_URI,
-    LOADED_MESSAGE: process.env.LOADED_MESSAGE,
+    LOADED_MESSAGE: process.env.LOADED_MESSAGE || 'NOT LOADED',
 
     session: {
       password: process.env.NUXT_SESSION_PASSWORD || ''

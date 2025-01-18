@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-export default defineNitroPlugin(() => {
+export default defineNitroPlugin(nitroApp => {
     const config = useRuntimeConfig()
     const MONGODB_URI = config.MONGODB_URI
 
