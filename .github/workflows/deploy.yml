@@ -23,10 +23,6 @@ jobs:
           npm install
           npm run build
 
-      - name: Create ecosystem config
-        run: |
-          echo "${{ secrets.ECOSYSTEM_CONFIG }}" > .output/ecosystem.config.cjs 
-
       - name: Add SSH key
         run: |
           mkdir ~/.ssh
@@ -39,7 +35,7 @@ jobs:
 
       - name: Deploy files with rsync
         run: |
-          rsync -rz --delete .output/ root@${{secrets.HOST}}:/opt/meza-servers
+          rsync -rz --delete --exclude 'ecosystem.config.cjs' .output/ root@${{secrets.HOST}}:/opt/meza-servers
 
       - name: Restart application with PM2
         run: |
