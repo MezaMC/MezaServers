@@ -32,16 +32,18 @@ jobs:
 
       - name: Deploy files with rsync
         run: |
+          rsync -rz meza-servers.nginx.conf root@${{secrets.HOST}}:/etc/nginx/sites-enabled/meza-servers.nginx.conf
           rsync -rz docker-compose.yml Dockerfile root@${{secrets.HOST}}:/opt/meza-servers/
           rsync -rz --delete --exclude '.env' .output/ root@${{secrets.HOST}}:/opt/meza-servers/app
 
-      - name: Restart docker compose
+      - name: Restart docker compose & nginx
         run: |
           ssh root@${{ secrets.HOST }} << 'EOF'
           cd /opt/meza-servers/
           docker compose build
           docker compose down
           docker compose up -d
+          systemctl restart nginx
           EOF
 
       - name: Remove SSH files
