@@ -2,16 +2,17 @@ import mongoose from 'mongoose';
 
 export default defineNitroPlugin(() => {
     const config = useRuntimeConfig()
-    const mongoURI = config.MONGODB_URI
+    const MONGODB_URI = config.MONGODB_URI
 
-    if (mongoURI === undefined || mongoURI === "") {
+    console.log("!!! " + config.LOADED_MESSAGE)
+
+    if (MONGODB_URI === undefined || MONGODB_URI === "") {
         console.error("MongoDB connection string not loaded")
         return
     }
 
     if (!mongoose.connection.readyState) {
-        console.log("uri: " + mongoURI)
-        mongoose.connect(mongoURI).then(() => {
+        mongoose.connect(MONGODB_URI).then(() => {
             console.log('Connected to MongoDB')
         }).catch(() => {
             console.error('Not connected to MongoDB')
