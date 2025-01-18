@@ -34,7 +34,7 @@ jobs:
           echo "${{ secrets.OPENSSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
 
-      - name: ssh-keyscan
+      - name: SSH keyscan
         run: |
           ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
 
