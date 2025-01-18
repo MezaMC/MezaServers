@@ -8,12 +8,12 @@ import UHeader from "~/components/header/UHeader.vue";
 
     <UHeader />
 
-    <main class="container">
+    <main class="block-container">
       <NuxtPage />
     </main>
 
-    <footer class="container">
-      <span>Выпущено под <NuxtLink to="https://github.com/MezaMC/MezaServers/blob/main/LICENSE">лицензией MIT</NuxtLink></span>
+    <footer class="block-container">
+      <span>Выпущено под <NuxtLink to="https://github.com/MezaMC/MezaServers/blob/main/LICENSE" target="_blank">лицензией MIT</NuxtLink></span>
       <span>Copyright © 2025 - {{(new Date()).getFullYear()}} envizar</span>
     </footer>
 
@@ -30,7 +30,7 @@ import UHeader from "~/components/header/UHeader.vue";
   --uno: "flex flex-col gap-5";
 }
 
-.container {
+.block-container {
   @apply "rounded-xl box-border";
   @apply "p-8 lt-phone:p-4";
   background-color: var(--c-bg-main);

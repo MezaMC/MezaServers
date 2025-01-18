@@ -33,7 +33,7 @@ onBeforeUnmount(() => document.removeEventListener('click', () => {}));
       </div>
     </template>
 
-    <UButton v-else href="/auth/github" type="link" icon="lucide:log-in">Войти через GitHub</UButton>
+    <UButton v-else href="/auth/github" type="link" icon="lucide:log-in">Войти<span class="lt-phone:hidden"> через GitHub</span></UButton>
   </AuthState>
 </template>
 

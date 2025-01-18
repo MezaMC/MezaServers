@@ -44,6 +44,6 @@ jobs:
           docker compose up -d
           EOF
 
-      - name: Clean up SSH files
+      - name: Remove SSH files
         run: |
           rm ~/.ssh/id_rsa
