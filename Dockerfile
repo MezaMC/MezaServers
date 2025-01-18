@@ -2,7 +2,7 @@ FROM node:22
 
 WORKDIR /usr/src/app
 
-COPY . .
+COPY ./app/* .
 
 EXPOSE 3000
 
