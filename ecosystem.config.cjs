@@ -3,7 +3,7 @@ module.exports = {
         {
             name: 'meza-servers',
             port: '3033',
-            script: './.output/server/index.mjs',
+            script: './server/index.mjs',
             args: 'start',
 
             env: {
