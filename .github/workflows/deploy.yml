@@ -25,8 +25,7 @@ jobs:
 
       - name: Add files
         run: |
-          echo "${{ secrets.ENV }}" > .output/server/.env.production
-          echo "${{ secrets.ENV }}" > .output/server/.env
+          echo "${{ secrets.ENV }}" > .output/.env
           mv ecosystem.config.cjs .output/
 
       - name: Add SSH key
@@ -47,6 +46,7 @@ jobs:
         run: |
           ssh root@${{ secrets.HOST }} << 'EOF'
           cd /opt/meza-servers
+          source .env
           pm2 delete "meza-servers" || true 
           pm2 start ecosystem.config.cjs --env production
           pm2 save
