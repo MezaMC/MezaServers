@@ -25,7 +25,7 @@ export default defineEventHandler(async (event) => {
     } else
         return {"error": "pass \"act\" key with \"add\" or \"remove\" value in request body"}
 
-    const storageData: ServerData | null = await storage.getItem(serverName)
+    const storageData = (await storage.getItem(serverName)) as ServerData | null
     if (storageData) {
         storageData.stars = serverEntry.stars
         await storage.setItem(serverName, storageData)

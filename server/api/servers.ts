@@ -7,16 +7,11 @@ export default defineEventHandler(async (event) => {
 
     const servers = await storage.getKeys()
     for (const serverName of servers) {
-        const serverData: ServerData | null = await storage.getItem(serverName)
+        const serverData = (await storage.getItem(serverName)) as (ServerData | null)
         if (serverData == null) continue
         serverDataMap[serverName] = serverData
     }
 
     return serverDataMap
-
-
-    // storage.getKeys().then(data => {
-    //     return data
-    // })
 
 })
