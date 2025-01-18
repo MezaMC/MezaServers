@@ -18,19 +18,19 @@ jobs:
 
       - uses: actions/checkout@v3
 
-      - name: Add ssh key
+      - name: Add SSH key
         run: |
           mkdir ~/.ssh
           echo "${{ secrets.OPENSSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
 
-      - name: Build
+      - name: Build Nuxt app
         run: |
           npm install
           npm run build
 
-      - name: Add files file
+      - name: Add files
         run: |
           echo "${{ secrets.ENV }}" > .output/.env
           mv ecosystem.config.cjs .output/
@@ -43,10 +43,10 @@ jobs:
         run: |
           ssh root@${{ secrets.HOST }} << 'EOF'
           pm2 delete "meza-servers" || true 
-          pm2 start /opt/meza-servers/ecosystem.config.js --env production
+          pm2 start /opt/meza-servers/ecosystem.config.cjs --env production
           pm2 save
           EOF
 
-      - name: Clean up ssh files for some reason
+      - name: Clean up SSH files
         run: |
           rm ~/.ssh/id_rsa
