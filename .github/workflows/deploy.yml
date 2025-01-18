@@ -28,22 +28,18 @@ jobs:
           mkdir ~/.ssh
           echo "${{ secrets.OPENSSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-
-      - name: SSH keyscan
-        run: |
           ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
 
       - name: Deploy files with rsync
         run: |
-          rsync -rz --delete --exclude 'ecosystem.config.cjs' .output/ root@${{secrets.HOST}}:/opt/meza-servers
+          rsync -rz docker-compose.yml Dockerfile root@${{secrets.HOST}}:/opt/meza-servers/
+          rsync -rz --delete --exclude '.env' .output/ root@${{secrets.HOST}}:/opt/meza-servers/app
 
-      - name: Restart application with PM2
+      - name: Restart docker compose
         run: |
           ssh root@${{ secrets.HOST }} << 'EOF'
-          cd /opt/meza-servers
-          pm2 delete "meza-servers" || true
-          pm2 start ecosystem.config.cjs --env production
-          pm2 save
+          cd /opt/meza-servers/
+          docker compose down && docker compose up -d
           EOF
 
       - name: Clean up SSH files

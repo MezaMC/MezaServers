@@ -1,0 +1,25 @@
+services:
+
+  meza-servers:
+    build: .
+    container_name: meza-servers
+    ports:
+      - "3033:3000"
+    environment:
+      NODE_ENV: production
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - /opt/meza-servers/database:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+      GLIBC_TUNABLES: glibc.pthread.rseq=0
+    restart: always
+    command: [--bind_ip_all, --auth]
