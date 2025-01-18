@@ -5,7 +5,7 @@ module.exports = {
             port: '3033',
             script: './server/index.mjs',
             args: 'start',
-            env_file: './.env'
+            env_file: '.env'
         }
     ]
 }

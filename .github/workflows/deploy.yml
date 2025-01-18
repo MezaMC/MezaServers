@@ -47,6 +47,7 @@ jobs:
           ssh root@${{ secrets.HOST }} << 'EOF'
           cd /opt/meza-servers
           pm2 delete "meza-servers" || true
+          source .env
           pm2 start ecosystem.config.cjs --update-env
           pm2 save
           EOF
