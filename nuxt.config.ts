@@ -23,7 +23,7 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
-    MONGODB_URI: process.env.MONGODB_URI,
+    MONGODB_URI: process.env.NUXT_MONGODB_URI,
 
     session: {
       password: process.env.NUXT_SESSION_PASSWORD || ''
