@@ -7,6 +7,11 @@ export default defineNuxtConfig({
 
   modules: ['@unocss/nuxt', 'nuxt-auth-utils', '@nuxt/icon', '@vueuse/nuxt'],
 
+  // Cache API routes for 10 seconds
+  routeRules: {
+    '/api/**': { cache: { maxAge: 10 } },
+  },
+
   // Fix warning about scss
   vite: {
     css: {

@@ -16,6 +16,7 @@ onBeforeUnmount(() => document.removeEventListener('click', () => {}));
 <template>
   <AuthState v-slot="{ loggedIn, clear, user }">
     <template v-if="loggedIn && user">
+
       <div class="dropdown">
         <transition>
           <div v-if="isOpen" class="logout-dropdown">
@@ -33,7 +34,12 @@ onBeforeUnmount(() => document.removeEventListener('click', () => {}));
       </div>
     </template>
 
-    <UButton v-else href="/auth/github" type="link" icon="lucide:log-in">Войти<span class="lt-phone:hidden"> через GitHub</span></UButton>
+    <UButton v-else href="/auth/github" type="link" icon="lucide:log-in">
+      <span>Войти
+        <span class="lt-phone:hidden"> через GitHub</span>
+      </span>
+    </UButton>
+
   </AuthState>
 </template>
 

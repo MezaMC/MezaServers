@@ -4,7 +4,15 @@ import 'assets/css/style.scss'
 import {Toaster} from "vue-sonner";
 
 useSeoMeta({
-  titleTemplate: "%s • MezaServers"
+  titleTemplate: "%s • MezaServers",
+  creator: "envizar",
+  description: "Современный мониторинг мистических серверов",
+
+  ogTitle: "MezaServers",
+  ogDescription: "Современный мониторинг мистических серверов",
+  ogLocale: "ru_RU",
+  ogImage: "https://servers.meza.one/logo.png",
+  ogType: "website"
 })
 
 useFavicon("/favicon.svg")

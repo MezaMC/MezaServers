@@ -13,8 +13,12 @@ import UHeader from "~/components/header/UHeader.vue";
     </main>
 
     <footer class="block-container">
-      <span>Выпущено под <NuxtLink to="https://github.com/MezaMC/MezaServers/blob/main/LICENSE" target="_blank">лицензией MIT</NuxtLink></span>
-      <span>Copyright © 2025 - {{(new Date()).getFullYear()}} envizar</span>
+      <span>Выпущено под
+        <NuxtLink to="https://github.com/MezaMC/MezaServers/blob/main/LICENSE" target="_blank">лицензией MIT</NuxtLink>
+      </span>
+      <span>Copyright © 2025 - {{(new Date()).getFullYear()}}
+        <NuxtLink to="https://envizar.meza.one" target="_blank">envizar</NuxtLink>
+      </span>
     </footer>
 
   </div>
