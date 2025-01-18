@@ -1,11 +1,20 @@
 module.exports = {
     apps: [
         {
-            name: 'MezaServers',
+            name: 'meza-servers',
             port: '3033',
-            exec_mode: 'cluster',
-            instances: 'max',
-            script: './.output/server/index.mjs'
+            script: './.output/server/index.mjs',
+            args: 'start',
+
+            env: {
+                NODE_ENV: "development"
+            },
+            env_production: {
+                NODE_ENV: "production",
+            },
+
+            env_file: "/opt/meza-servers/.env"
+
         }
     ]
 }

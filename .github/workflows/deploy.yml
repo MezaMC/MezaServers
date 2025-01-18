@@ -1,0 +1,52 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.commits[0].message, '[ci-skip]')"
+    steps:
+
+      - uses: actions/checkout@v3
+
+      - name: Add ssh key
+        run: |
+          mkdir ~/.ssh
+          echo "${{ secrets.OPENSSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+
+      - name: Build
+        run: |
+          npm install
+          npm run build
+
+      - name: Add files file
+        run: |
+          echo "${{ secrets.ENV }}" > .output/.env
+          mv ecosystem.config.cjs .output/
+
+      - name: Deploy files with rsync
+        run: |
+          rsync -rz --delete .output/ root@${{secrets.HOST}}:/opt/meza-servers
+
+      - name: Restart application with PM2
+        run: |
+          ssh root@${{ secrets.HOST }} << 'EOF'
+          pm2 delete "meza-servers" || true 
+          pm2 start /opt/meza-servers/ecosystem.config.js --env production
+          pm2 save
+          EOF
+
+      - name: Clean up ssh files for some reason
+        run: |
+          rm ~/.ssh/id_rsa
