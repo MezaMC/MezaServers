@@ -16,7 +16,7 @@ const emit = defineEmits(['updateStars']);
 <template>
   <div class="flex bg-bg-card justify-between border-b-(1px solid sep) lt-phone:(items-start) items-center">
     <div class="flex items-center lt-phone:(flex-col h-[128px] items-start gap-1)">
-      <img :src="img" alt="server icon" width="64" height="64" />
+      <img :src="img || '/pack.png'" alt="server icon" width="64" height="64" />
       <div class="debug flex flex-col w-fit h-fit sm:m-l-4 m-l-2 gap-0.5">
         <span class="debug font-600 sm:text-2xl text-xl h-8 text-nowrap flex items-center" v-html="displayName ?? name"></span>
         <div class="flex gap-1 items-center max-h-6">

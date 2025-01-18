@@ -39,7 +39,9 @@ jobs:
         run: |
           ssh root@${{ secrets.HOST }} << 'EOF'
           cd /opt/meza-servers/
-          docker compose down && docker compose up -d
+          docker compose build
+          docker compose down
+          docker compose up -d
           EOF
 
       - name: Clean up SSH files

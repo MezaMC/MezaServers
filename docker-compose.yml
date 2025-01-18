@@ -9,6 +9,8 @@ services:
       NODE_ENV: production
     depends_on:
       - mongodb
+    networks:
+      - app-network
 
   mongodb:
     image: mongo:latest
@@ -23,3 +25,9 @@ services:
       GLIBC_TUNABLES: glibc.pthread.rseq=0
     restart: always
     command: [--bind_ip_all, --auth]
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
