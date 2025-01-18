@@ -25,7 +25,7 @@ jobs:
 
       - name: Add files
         run: |
-          echo "${{ secrets.ENV }}" > .output/.env
+          echo "${{ secrets.ENV }}" > .output/.env.production
           mv ecosystem.config.cjs .output/
 
       - name: Add SSH key
