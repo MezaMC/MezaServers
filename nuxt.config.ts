@@ -9,7 +9,7 @@ export default defineNuxtConfig({
 
   // Cache API routes for 10 seconds
   routeRules: {
-    '/api/**': { cache: { maxAge: 10 } },
+    '/api/servers': { cache: { maxAge: 10 } },
   },
 
   // Fix warning about scss
