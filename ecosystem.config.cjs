@@ -13,7 +13,7 @@ module.exports = {
                 NODE_ENV: "production",
             },
 
-            env_file: "/opt/meza-servers/.env"
+            env_file: ".env"
 
         }
     ]
