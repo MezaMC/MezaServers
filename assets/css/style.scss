@@ -22,7 +22,8 @@ pre code {
 }
 
 hr {
-  color: var(--c-sep);
+  border: 1px solid var(--c-sep);
+  color: transparent;
 }
 
 a {
