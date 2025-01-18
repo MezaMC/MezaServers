@@ -10,6 +10,7 @@ export default defineNitroPlugin(() => {
     }
 
     if (!mongoose.connection.readyState) {
+        console.log(mongoURI)
         mongoose.connect(mongoURI).then(() => {
             console.log('Connected to MongoDB')
         }).catch(() => {
