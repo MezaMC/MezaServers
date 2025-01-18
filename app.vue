@@ -4,12 +4,13 @@ import 'assets/css/style.scss'
 import {Toaster} from "vue-sonner";
 
 useSeoMeta({
-  titleTemplate: "%s ・ MezaServers"
+  titleTemplate: "%s • MezaServers"
 })
+
+useFavicon("/favicon.svg")
 </script>
 
 <template>
-  <AppLayout />
-
+  <NuxtLayout />
   <Toaster position="bottom-right" theme="dark" rich-colors />
 </template>

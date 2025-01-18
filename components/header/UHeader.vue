@@ -15,7 +15,6 @@ const navLinks: Array<NavLink> = [
   { text: "О проекте", link: "/about", icon: "lucide:book" },
   { text: "ЧаВо", link: "/faq", icon: "lucide:message-circle-question" },
   { text: "Telegram", link: "https://t.me/meza_inc", icon: "tabler:brand-telegram", external: true },
-  // { text: "Discord", link: "https://ds.meza.one", icon: "tabler:brand-discord", external: true }
 ]
 
 </script>
@@ -27,7 +26,7 @@ const navLinks: Array<NavLink> = [
     <div class="flex flex-row justify-between w-full">
       <div class="flex gap-2 text-xl items-center font-700 decoration-none text-t-contrast">
         <NuxtIcon name="lucide:server-cog" class="text-2xl" />
-        <span class="flex gap-0.5">
+        <span class="flex gap-0.7">
           MezaServers
           <span class="text-brand text-sm transform-translate-y--0.5">&beta;</span>
         </span>
@@ -39,7 +38,6 @@ const navLinks: Array<NavLink> = [
 
     <!-- Навигация -->
     <nav class="flex flex-row w-full flex-wrap gap-[0.5rem_1.25rem]">
-
       <template v-for="linkData in navLinks">
         <NuxtLink
             :to="linkData.link"
@@ -50,21 +48,6 @@ const navLinks: Array<NavLink> = [
           <span>{{linkData.text}}</span>
         </NuxtLink>
       </template>
-
-
-
-
-
-<!--      <NuxtLink to="/about" class="nav-item">-->
-<!--        <NuxtIcon name="lucide:book" />-->
-<!--        <span>О проекте</span>-->
-<!--      </NuxtLink>-->
-
-<!--      <NuxtLink to="/faq" class="nav-item">-->
-<!--        <NuxtIcon name="lucide:" />-->
-<!--        <span>Частые вопросы</span>-->
-<!--      </NuxtLink>-->
-
     </nav>
 
   </header>
