@@ -20,6 +20,13 @@ export default defineNuxtConfig({
 
   icon: {
     componentName: 'NuxtIcon'
+  },
+
+  runtimeConfig: {
+    MONGODB_URI: process.env.MONGODB_URI,
+    NUXT_SESSION_PASSWORD: process.env.NUXT_SESSION_PASSWORD,
+    NUXT_OAUTH_GITHUB_CLIENT_ID: process.env.NUXT_OAUTH_GITHUB_CLIENT_ID,
+    NUXT_OAUTH_GITHUB_CLIENT_SECRET: process.env.NUXT_OAUTH_GITHUB_CLIENT_SECRET
   }
 
 })
