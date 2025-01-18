@@ -32,7 +32,7 @@ jobs:
 
       - name: Deploy files with rsync
         run: |
-          rsync -rz meza-servers.nginx.conf root@${{secrets.HOST}}:/etc/nginx/sites-enabled/meza-servers.nginx.conf
+          rsync -rz meza-servers.nginx.conf root@${{secrets.HOST}}:/etc/nginx/sites-enabled/meza-servers.conf
           rsync -rz docker-compose.yml Dockerfile root@${{secrets.HOST}}:/opt/meza-servers/
           rsync -rz --delete --exclude '.env' .output/ root@${{secrets.HOST}}:/opt/meza-servers/app
 
