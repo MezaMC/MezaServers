@@ -20,7 +20,7 @@ const navLinks: Array<NavLink> = [
 </script>
 
 <template>
-  <header class="flex flex-col gap-3">
+  <header class="flex flex-col gap-3 lt-phone:m-b-2">
 
     <!-- Название и кнопка входа/выхода-->
     <div class="flex flex-row justify-between w-full">

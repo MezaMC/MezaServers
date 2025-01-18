@@ -40,7 +40,7 @@ h1 {
   color: var(--c-text-contrast);
   border-bottom: 2px solid var(--c-sep);
   margin: 0 0 1rem;
-  @apply "lt-phone:text-2xl";
+  @apply "lt-phone:text-[1.75rem]";
 }
 
 p {

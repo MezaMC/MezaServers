@@ -18,9 +18,9 @@ const emit = defineEmits(['updateStars']);
     <div class="flex items-center lt-phone:(flex-col h-[128px] items-start gap-1)">
       <img :src="img || '/pack.png'" alt="server icon" width="64" height="64" />
       <div class="debug flex flex-col w-fit h-fit sm:m-l-4 m-l-2 gap-0.5">
-        <span class="debug font-600 sm:text-2xl text-xl h-8 text-nowrap flex items-center" v-html="displayName ?? name"></span>
+        <span class="debug font-600 sm:text-2xl text-xl h-8 text-nowrap flex items-center text-t-contrast" v-html="displayName ?? name"></span>
         <div class="flex gap-1 items-center max-h-6">
-          <span class="debug font-mono lt-sm:text-sm h-fit text-brand-main font-700 flex items-center rounded">{{ ip }}</span>
+          <span class="debug font-mono lt-sm:text-sm h-fit text-brand-main font-700 flex items-center rounded text-brand">{{ ip }}</span>
           <ServerCopyButton :string="ip" />
         </div>
       </div>

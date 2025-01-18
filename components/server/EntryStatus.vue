@@ -13,7 +13,7 @@ const props = defineProps<{
   <div class="flex gap-2.5 items-center">
 
     <template v-if="data.online === true">
-      <div class="h-1.5 w-1.5 bg-green rounded shadow-green shadow-[0px_0px_5px_1px] " />
+      <div class="bg-green shadow-green indicator" />
       <span v-if="data.players?.online !== undefined && data.players?.max !== undefined" class="flex gap-1">
         <span class="text-t-secondary">Онлайн:</span>
         <span class="flex gap-0.5">{{ data.players.online }}<span class="text-t-secondary">/</span>{{ data.players.max }}</span>
@@ -25,17 +25,17 @@ const props = defineProps<{
     </template>
 
     <template v-else-if="data.status === 'maintenance'">
-      <div class="h-1.5 w-1.5 bg-blue-5 rounded shadow-blue-6 shadow-[0px_0px_5px_1px]" />
+      <div class="bg-blue-5 shadow-blue-6 indicator" />
       <span class="text-t-secondary">Технические работы</span>
     </template>
 
     <template v-else-if="data.status === 'frozen'">
-      <div class="h-1.5 w-1.5 bg-gray-5 rounded shadow-gray-6 shadow-[0px_0px_5px_1px]" />
+      <div class="bg-gray-5 shadow-gray-6 indicator" />
       <span class="text-t-secondary">Временно заморожен</span>
     </template>
 
     <template v-else class="status-bar">
-      <div class="h-1.5 w-1.5 bg-red-6 rounded shadow-red-6 shadow-[0px_0px_5px_1px]" />
+      <div class="bg-red-6 shadow-red-6 indicator" />
       <span class="text-t-secondary">Выключен</span>
     </template>
 
@@ -44,5 +44,9 @@ const props = defineProps<{
 </template>
 
 <style scoped lang="scss">
+
+.indicator {
+  @apply "h-1.5 w-1.5 shadow-[0px_0px_5px_1px] rounded-full m-l-0.75";
+}
 
 </style>
