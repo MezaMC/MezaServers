@@ -23,10 +23,9 @@ jobs:
           npm install
           npm run build
 
-      - name: Add files
+      - name: Create ecosystem config
         run: |
-          echo "${{ secrets.ENV }}" > .output/.env
-          mv ecosystem.config.cjs .output/
+          echo "${{ secrets.ECOSYSTEM_CONFIG }}" > .output/ecosystem.config.cjs 
 
       - name: Add SSH key
         run: |
@@ -47,7 +46,6 @@ jobs:
           ssh root@${{ secrets.HOST }} << 'EOF'
           cd /opt/meza-servers
           pm2 delete "meza-servers" || true
-          source .env
           pm2 start ecosystem.config.cjs --update-env
           pm2 save
           EOF
