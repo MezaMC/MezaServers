@@ -1,9 +1,9 @@
 <script setup lang="ts">
-const route = useRoute()
+const server = useRoute().params.server
 </script>
 
 <template>
-  View server {{ route.params.server }}
+  View server {{ server }}
 </template>
 
 <style scoped lang="scss">

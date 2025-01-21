@@ -7,8 +7,16 @@ export default defineNuxtConfig({
     '@unocss/nuxt',
     'nuxt-auth-utils',
     '@nuxt/icon',
-    '@vueuse/nuxt'
+    '@vueuse/nuxt',
+    '@nuxt/image',
+    '@nuxtjs/sitemap',
+    'nuxt-seo-utils',
   ],
+
+  site: {
+    name: 'MezaServers',
+    url: 'servers.meza.one',
+  },
 
   // Rendering options
   ssr: false,
@@ -18,12 +26,18 @@ export default defineNuxtConfig({
     "/faq": { static: true },
   },
 
-  // Favicon
-  app: {
-    head: {
-      link: [
-          { rel: 'icon', href: '/favicon.svg' }
-      ]
+  // Seo meta
+  seo: {
+    enabled: true,
+    meta: {
+      creator: "envizar",
+      description: "Современный мониторинг мистических Minecraft серверов",
+
+      ogTitle: "MezaServers",
+      ogDescription: "Современный мониторинг мистических Minecraft серверов",
+      ogLocale: "ru_RU",
+      ogImage: "https://servers.meza.one/logo.png",
+      ogType: "website"
     }
   },
 

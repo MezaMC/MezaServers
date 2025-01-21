@@ -29,33 +29,34 @@ async function starRequest(act: "add" | "remove") {
 <template>
   <AuthState v-slot="{ user, loggedIn }">
     <div class="flex items-center m-r-4 lt-phone:(m-t-2 m-r-2)">
+
       <template v-if="loggedIn && user?.id">
+
         <UButton
-            icon="tabler:star-filled"
             v-if="stars.includes(user.id)"
-            @click="starRequest('remove')"
-            class="important:(p-l-3 p-r-3)">
+            icon="tabler:star-filled"
+            class="important:(p-l-3 p-r-3)"
+            @click="starRequest('remove')">
           {{ stars.length }}
         </UButton>
+
         <UButton
-            icon="tabler:star"
             v-else
-            @click="starRequest('add')"
-            class="important:(p-l-3 p-r-3)">
-          {{ stars.length }}
-        </UButton>
-      </template>
-      <template v-else>
-        <UButton
             icon="tabler:star"
-            class="important:(p-l-3 p-r-3 bg-[#00000000] cursor-auto)">
+            class="important:(p-l-3 p-r-3)"
+            @click="starRequest('add')">
           {{ stars.length }}
         </UButton>
+
       </template>
+
+      <UButton
+          v-else
+          icon="tabler:star"
+          class="important:(p-l-3 p-r-3 bg-[#00000000] cursor-auto)">
+        {{ stars.length }}
+      </UButton>
+
     </div>
   </AuthState>
 </template>
-
-<style scoped lang="scss">
-
-</style>

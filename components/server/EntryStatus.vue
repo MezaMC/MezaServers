@@ -1,11 +1,9 @@
 <script setup lang="ts">
-
 import type {ServerData} from "~/server/plugins/ping";
 
 const props = defineProps<{
   data: ServerData
 }>()
-
 </script>
 
 <template >
@@ -34,7 +32,7 @@ const props = defineProps<{
       <span class="text-t-secondary">Временно заморожен</span>
     </template>
 
-    <template v-else class="status-bar">
+    <template v-else>
       <div class="bg-red-6 shadow-red-6 indicator" />
       <span class="text-t-secondary">Выключен</span>
     </template>

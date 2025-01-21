@@ -6,12 +6,12 @@ const props = defineProps<{
   serverName: string
   serverData: ServerData
 }>()
-
 </script>
 
 <template>
   <div v-if="serverData" class="rounded-2 overflow-hidden border-(1px solid sep) hover:border-sepacc transition-border-color flex flex-col">
 
+    <!-- Верхний блок: Иконка, Название, IP -->
     <ServerEntryTop
         :ip="serverData.ip"
         :name="serverName"
@@ -19,18 +19,14 @@ const props = defineProps<{
         :img="serverData.display?.favicon || undefined"
         :stars="serverData.stars"
         @update-stars="emit('updateStars')"
-    /> <!-- Верхний блок (иконка, название и ip) -->
+    />
 
-    <div class="w-full box-border flex p-l-4 p-r-4 p-4 p-b-5 flex-col gap-3"> <!-- Нижний блок -->
-
-      <span v-html="serverData.display?.desc" v-if="serverData.display?.desc" class="text-vptext-1.5" /> <!-- Описание -->
-      <ServerEntryStatus :data="serverData" /> <!-- Онлайн и версия -->
-      <ServerEntryLinks :links="serverData.links" /> <!-- Ссылки -->
-
+    <!-- Нижний блок: Описание, Статус, Ссылки -->
+    <div class="w-full box-border flex p-l-4 p-r-4 p-4 p-b-5 flex-col gap-3">
+      <span v-html="serverData.display?.desc" v-if="serverData.display?.desc" class="text-vptext-1.5" />
+      <ServerEntryStatus :data="serverData" />
+      <ServerEntryLinks :links="serverData.links" />
     </div>
+
   </div>
 </template>
-
-<style scoped lang="sass">
-
-</style>

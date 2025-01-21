@@ -16,7 +16,6 @@ const navLinks: Array<NavLink> = [
   { text: "ЧаВо", link: "/faq", icon: "lucide:message-circle-question" },
   { text: "Telegram", link: "https://t.me/meza_inc", icon: "tabler:brand-telegram", external: true },
 ]
-
 </script>
 
 <template>

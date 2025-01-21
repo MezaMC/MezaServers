@@ -3,7 +3,6 @@ import {computed} from "vue";
 import type {ServerData} from "~/server/plugins/ping";
 
 const { data } = await useFetch('/api/servers')
-
 async function refetch() {
   data.value = await $fetch('/api/servers')
 }
@@ -17,7 +16,6 @@ const sortedData = computed(() => {
         return nameA.localeCompare(nameB);
       });
 });
-
 </script>
 
 <template>
@@ -33,7 +31,3 @@ const sortedData = computed(() => {
 
   </div>
 </template>
-
-<style scoped lang="scss">
-
-</style>

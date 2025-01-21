@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 import UHeader from "~/components/header/UHeader.vue";
 </script>
 
@@ -25,6 +24,7 @@ import UHeader from "~/components/header/UHeader.vue";
 </template>
 
 <style scoped lang="scss">
+
 .content {
   --margin: 2rem;
   max-width: 800px;

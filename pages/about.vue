@@ -1,11 +1,7 @@
 <script setup lang="ts">
-
 import UButton from "~/components/ui/UButton.vue";
 
-useSeoMeta({
-  title: "О проекте"
-})
-
+useSeoMeta({ title: "О проекте" })
 </script>
 
 <template>
@@ -43,7 +39,3 @@ useSeoMeta({
   </div>
 
 </template>
-
-<style scoped lang="scss">
-
-</style>
