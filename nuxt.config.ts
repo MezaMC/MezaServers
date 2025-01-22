@@ -1,4 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import packageJson from './package.json'
+
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
@@ -30,11 +32,11 @@ export default defineNuxtConfig({
   seo: {
     enabled: true,
     meta: {
-      creator: "envizar",
-      description: "Современный мониторинг мистических Minecraft серверов",
+      creator: packageJson.author,
+      description: packageJson.description,
 
       ogTitle: "MezaServers",
-      ogDescription: "Современный мониторинг мистических Minecraft серверов",
+      ogDescription: packageJson.description,
       ogLocale: "ru_RU",
       ogImage: "https://servers.meza.one/logo.png",
       ogType: "website"
@@ -63,6 +65,9 @@ export default defineNuxtConfig({
         clientId: process.env.NUXT_OAUTH_GITHUB_CLIENT_ID,
         clientSecret: process.env.NUXT_OAUTH_GITHUB_CLIENT_SECRET
       }
+    },
+    public: {
+      VER: `v${packageJson.version}`
     }
   },
 

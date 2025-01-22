@@ -16,6 +16,8 @@ const navLinks: Array<NavLink> = [
   { text: "ЧаВо", link: "/faq", icon: "lucide:message-circle-question" },
   { text: "Telegram", link: "https://t.me/meza_inc", icon: "tabler:brand-telegram", external: true },
 ]
+
+const ver = useRuntimeConfig().public.VER
 </script>
 
 <template>
@@ -27,7 +29,7 @@ const navLinks: Array<NavLink> = [
         <NuxtIcon name="lucide:server-cog" class="text-2xl" />
         <span class="flex gap-0.7">
           MezaServers
-          <span class="text-brand text-sm transform-translate-y--0.5">&beta;</span>
+          <span class="text-brand text-sm transform-translate-y--0.5">{{ ver }}</span>
         </span>
       </div>
       <div class="flex items-center gap-2">
