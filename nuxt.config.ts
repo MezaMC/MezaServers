@@ -21,11 +21,18 @@ export default defineNuxtConfig({
   },
 
   // Rendering options
-  ssr: false,
+  ssr: true,
+
+  nitro: {
+    prerender: {
+      crawlLinks: true,
+    }
+  },
+
   routeRules: {
-    "/adding-server": { static: true },
-    "/about": { static: true },
-    "/faq": { static: true },
+    "/": { ssr: false },
+    "/server/**": { prerender: false, ssr: false }, 
+    "/api/**": { prerender: false }
   },
 
   // Seo meta
@@ -34,12 +41,22 @@ export default defineNuxtConfig({
     meta: {
       creator: packageJson.author,
       description: packageJson.description,
+      title: "MezaServers",
 
       ogTitle: "MezaServers",
       ogDescription: packageJson.description,
-      ogLocale: "ru_RU",
+      ogLocale: "ru",
       ogImage: "https://servers.meza.one/logo.png",
-      ogType: "website"
+      ogType: "website",
+      ogUrl: "https://servers.meza.one"
+    }
+  },
+
+  app: {
+    head: {
+      htmlAttrs: {
+        lang: 'ru'
+      }
     }
   },
 

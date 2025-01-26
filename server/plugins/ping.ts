@@ -10,8 +10,10 @@ export interface ServerLinks {
     donate?: string | null
 }
 
+export type ServerStatus = "active" | "frozen" | "maintenance" | "pending"
+
 export interface ServerData {
-    status: "active" | "frozen" | "maintenance" | "pending",
+    status: ServerStatus,
     online?: boolean
     ip: string
     port?: number
@@ -61,7 +63,7 @@ async function pingServers() {
             await storage.setItem(name, data)
         })
 
-        console.log(`Servers: ${data.length}`)
+        // console.log(`Servers: ${data.length}`)
 
     }).catch(() => {
         console.error("Database issue or no servers found")
@@ -71,5 +73,9 @@ async function pingServers() {
 
 export default defineNitroPlugin((nitroApp) => {
     pingServers()
-    setInterval(pingServers, 5 * 60_000)
+    const pinger = setInterval(pingServers, 2.5 * 60_000)
+
+    nitroApp.hooks.hook('close', async () => {
+        clearInterval(pinger)
+    })
 })

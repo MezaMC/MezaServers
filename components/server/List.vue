@@ -1,33 +1,38 @@
 <script setup lang="ts">
-import {computed} from "vue";
-import type {ServerData} from "~/server/plugins/ping";
+import { computed } from "vue";
+import type { ServerData } from "~/server/plugins/ping";
 
-const { data } = await useFetch('/api/servers')
-async function refetch() {
-  data.value = await $fetch('/api/servers')
+type ServersDataType = { [name: string]: ServerData }
+
+const serversData = useState<ServersDataType | null>('serversData', () => null)
+
+if (!serversData.value) {
+  refetchServersData()
 }
 
-const sortedData = computed(() => {
-  return Object.entries(data.value as {[name: string]: ServerData})
-      .sort(([nameA, dataA], [nameB, dataB]) => {
-        const starsCompare = (dataB.stars?.length || 0) - (dataA.stars?.length || 0);
-        if (starsCompare !== 0) return starsCompare;
+async function refetchServersData() {
+  serversData.value = await $fetch<ServersDataType>('/api/servers')
+}
 
-        return nameA.localeCompare(nameB);
-      });
-});
+const serversDataSorted = computed(() => {
+  return Object.entries(serversData.value ?? {})
+      .sort(([nameA, dataA], [nameB, dataB]) => {
+        const starsCompare = (dataB.stars?.length || 0) - (dataA.stars?.length || 0)
+        if (starsCompare !== 0) return starsCompare
+
+        return nameA.localeCompare(nameB)
+      })
+})
 </script>
 
 <template>
   <div class="flex flex-col gap-8">
-
     <ServerEntry
         :server-data="serverData"
         :server-name="serverName as string"
         :key="serverName"
-        v-for="([serverName, serverData]) in sortedData"
-        @update-stars="refetch()"
+        v-for="([serverName, serverData]) in serversDataSorted"
+        @update-stars="refetchServersData()"
     />
-
   </div>
 </template>

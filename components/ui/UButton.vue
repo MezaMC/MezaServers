@@ -12,11 +12,11 @@ const props = defineProps<{
 
 const slots = useSlots()
 const padding = slots['default'] === undefined ? "0.5rem" : "0.5rem 0.8rem"
-var redirecting = false;
+let redirecting = false;
 
 function handleClick() {
   if (props.routerLink != undefined) {
-    useRouter().push("/about")
+    useRouter().push(props.routerLink)
     return
   }
   if (props.href != undefined && !redirecting) {

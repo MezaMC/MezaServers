@@ -39,7 +39,7 @@ const displayData: {
   <div class="flex items-center flex-wrap gap-[0.5rem_1.25rem]" v-if="links">
     <template v-for="(link, linkName) of links">
 
-      <a v-if="link" :href="link" target="_blank"
+      <a v-if="link && linkName in displayData" :href="link" target="_blank"
          class="cursor-pointer flex items-center gap-1">
         <NuxtIcon :name="displayData[linkName].icon" />
         {{ displayData[linkName].display }}

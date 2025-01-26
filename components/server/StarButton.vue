@@ -10,7 +10,7 @@ const props = defineProps<{
 }>()
 
 async function starRequest(act: "add" | "remove") {
-  const resp: any = await $fetch(`api/server/${props.name}/star`, {
+  const resp: any = await $fetch(`/api/server/${props.name}/star`, {
     method: 'post',
     body: {act}
   })

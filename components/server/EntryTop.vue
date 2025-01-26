@@ -11,19 +11,34 @@ const props = defineProps<{
 
 const emit = defineEmits(['updateStars']);
 
+const pushRoute = '/server/' + props.name;
 </script>
 
 <template>
   <div class="flex bg-bg-card justify-between border-b-(1px solid sep) lt-phone:(items-start) items-center">
     <div class="flex items-center lt-phone:(flex-col h-[128px] items-start gap-1)">
-      <NuxtImg :src="img || '/pack.png'" alt="server icon" width="64" height="64" />
-      <div class="debug flex flex-col w-fit h-fit sm:m-l-4 m-l-2 gap-0.5">
-        <span class="debug font-600 sm:text-2xl text-xl h-8 text-nowrap flex items-center text-t-contrast" v-html="displayName ?? name"></span>
+
+      <img :src="img || '/pack.png'" alt="server icon"
+           width="64" height="64"
+           class="hover:brightness-80 cursor-pointer"
+           @click="useRouter().push(pushRoute)" />
+
+      <div class="flex flex-col w-fit h-fit sm:m-l-4 m-l-2 gap-0.5">
+
+        <span
+            class="font-600 sm:text-2xl text-(xl nowrap t-contrast)
+            w-fit h-8 flex items-center hover:brightness-80 cursor-pointer"
+            v-html="displayName ?? name" @click="useRouter().push(pushRoute)"
+        />
+
         <div class="flex gap-1 items-center max-h-6">
-          <span class="debug font-mono lt-sm:text-sm h-fit text-brand-main font-700 flex items-center rounded text-brand">{{ ip }}</span>
+          <span class="font-mono lt-sm:text-sm h-fit text-brand-main font-700
+          flex items-center rounded text-brand">{{ ip }}</span>
           <ServerCopyButton :string="ip" />
         </div>
+
       </div>
+
     </div>
 
     <StarButton :stars="stars" :name="name" :display-name="displayName" @update-stars="emit('updateStars')" />

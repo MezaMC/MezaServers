@@ -1,11 +1,29 @@
 <script setup lang="ts">
-const server = useRoute().params.server
+import type {ServerData} from "~/server/plugins/ping";
+import UButton from "~/components/ui/UButton.vue";
+
+const serverName = useRoute().params.server
+
+const { data } = await useFetch<ServerData>(`/api/server/${serverName}`)
+async function refetch() {
+  data.value = await $fetch<ServerData>(`/api/server/${serverName}`)
+}
+
+if (data.value === undefined) {
+  throw createError({ statusCode: 404, statusMessage: 'Server Not Found' });
+}
 </script>
 
 <template>
-  View server {{ server }}
+  <div class="flex flex-col gap-4">
+
+    <UButton icon="lucide:arrow-left" router-link="/">К списку серверов</UButton>
+
+    <ServerEntry
+        :server-data="data!"
+        :server-name="serverName! as string"
+        @update-stars="refetch()"
+    />
+
+  </div>
 </template>
-
-<style scoped lang="scss">
-
-</style>
