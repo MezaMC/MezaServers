@@ -22,7 +22,7 @@ jobs:
         run: |
           echo ${{ secrets.ENV }} > .env
           npm install
-          npm run build
+          npm run build --dotenv=.env
 
       - name: Add SSH key
         run: |
