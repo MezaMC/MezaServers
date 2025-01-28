@@ -19,8 +19,8 @@ const prevImage = () => {
 
 <template>
   <div
-      class="flex flex-row gap-4 lt-sm:gap-0 items-center bg-bg-cardalt
-      border-(1px solid sep) p-3 lt-sm:p-0 justify-between rounded-2"
+      class="flex flex-row gap-4 lt-sm:gap-0 items-center bg-bg-cardalt h-45vw max-h-100
+      border-(1px solid sep) p-3 lt-sm:p-0 justify-between rounded-2 w-full box-border"
   >
 
     <button
@@ -34,7 +34,7 @@ const prevImage = () => {
         :key="currentIndex"
         :src="images[currentIndex]"
         alt=""
-        class="max-h-100 h-full max-w-150 w-full object-contain w-fit transition-all rounded-2 bg-bg-body"
+        class="max-h-100 h-full max-w-150 object-contain w-full transition-all rounded-2 bg-bg-body min-w-0"
     />
 
     <button
