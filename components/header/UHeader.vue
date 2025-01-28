@@ -27,8 +27,7 @@ const label = useRuntimeConfig().public.LABEL
     <!-- Название и кнопка входа/выхода-->
     <div class="flex flex-row justify-between w-full">
       <div class="flex gap-2 text-xl items-center font-700 decoration-none text-t-contrast">
-<!--        <NuxtIcon name="lucide:server-cog" class="text-2xl" />-->
-        <NuxtImg src="/logo.svg" alt="logo" />
+        <NuxtImg src="/logo.svg" alt="logo" class="w-6 h-6" />
         <span class="flex gap-0.7">
           {{ label }}
           <span class="text-brand text-sm transform-translate-y--0.5">{{ ver }}</span>
