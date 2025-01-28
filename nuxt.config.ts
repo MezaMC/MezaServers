@@ -17,7 +17,7 @@ export default defineNuxtConfig({
   ],
 
   site: {
-    name: 'MezaServers',
+    name: packageJson.displayName,
     url: 'servers.meza.one',
   },
 
@@ -41,12 +41,15 @@ export default defineNuxtConfig({
     meta: {
       creator: packageJson.author,
       description: packageJson.description,
-      title: "MezaServers",
+      title: packageJson.displayName,
+      keywords: "MezaServers Meza Servers MezaBook Minecraft Майнкрафт мистические сервера мистика",
 
-      ogTitle: "MezaServers",
+      ogTitle: packageJson.displayName,
       ogDescription: packageJson.description,
       ogLocale: "ru",
       ogImage: "https://servers.meza.one/logo.png",
+      ogImageHeight: 128,
+      ogImageWidth: 128,
       ogType: "website",
       ogUrl: "https://servers.meza.one"
     }
@@ -84,7 +87,8 @@ export default defineNuxtConfig({
       }
     },
     public: {
-      VER: `v${packageJson.version}`
+      VER: `v${packageJson.version}`,
+      LABEL: packageJson.displayName
     }
   },
 

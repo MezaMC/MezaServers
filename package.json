@@ -1,7 +1,8 @@
 {
   "name": "meza-servers",
   "author": "envizar",
-  "description": "MezaServers - современный мониторинг мистических Minecraft серверов, призванный собрать тематические проекты русскоязычного сообщества крипипаст в одном месте.",
+  "displayName": "MezaServers",
+  "description": "MezaServers - мониторинг русскоязычных мистических Minecraft серверов, собирающий проекты сообщества крипипаст в одном месте",
   "version": "1.2",
   "private": true,
   "type": "module",

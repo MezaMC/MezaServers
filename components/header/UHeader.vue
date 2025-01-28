@@ -18,6 +18,7 @@ const navLinks: Array<NavLink> = [
 ]
 
 const ver = useRuntimeConfig().public.VER
+const label = useRuntimeConfig().public.LABEL
 </script>
 
 <template>
@@ -29,7 +30,7 @@ const ver = useRuntimeConfig().public.VER
 <!--        <NuxtIcon name="lucide:server-cog" class="text-2xl" />-->
         <NuxtImg src="/logo.svg" alt="logo" />
         <span class="flex gap-0.7">
-          MezaServers
+          {{ label }}
           <span class="text-brand text-sm transform-translate-y--0.5">{{ ver }}</span>
         </span>
       </div>
