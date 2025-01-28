@@ -26,7 +26,11 @@ const ServerSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ["active", "maintenance", "frozen", "pending"]
+        enum: ["active", "maintenance", "frozen"]
+    },
+    images: {
+        type: [String],
+        required: false
     }
 }, { collection: 'servers' });
 

@@ -1,4 +1,4 @@
-import {ServerData} from "~/server/plugins/ping";
+import {ServerData} from "~/server/utils/servers";
 
 export default defineEventHandler(async (event) => {
 

@@ -1,6 +1,6 @@
 import Server from "~/server/models/Server";
 import {pingJava} from "@minescope/mineping";
-import {toVersion} from "~/utils/protocolConverter";
+import {toVersion} from "~/server/utils/protocolConverter";
 
 export interface ServerLinks {
     discord?: string | null,
@@ -10,7 +10,7 @@ export interface ServerLinks {
     donate?: string | null
 }
 
-export type ServerStatus = "active" | "frozen" | "maintenance" | "pending"
+export type ServerStatus = "active" | "frozen" | "maintenance"
 
 export interface ServerData {
     status: ServerStatus,
@@ -28,54 +28,49 @@ export interface ServerData {
         favicon?: string | null,
         name?: string | null
     },
-    stars: number[]
+    stars: number[],
+    images?: string[],
+
+    // Used only when requesting /api/server/:serverName/
+    // to display edit server elements
+    hasPerms?: boolean
 }
 
-async function pingServers() {
+// Fetch servers from database and ping every active server
+// then save them to nitro storage
+export async function updateServersData() {
     const storage = useStorage("servers")
+    try {
+        const serversData = await Server.find()
 
-    return await Server.find() .then(data => {
-
-        data.forEach(async serverEntry => {
+        for (let serverEntry of serversData) {
             if (!serverEntry.ip || !serverEntry.name) return
 
             const ip: string = serverEntry.ip
-            const port: number = serverEntry.port || 25565
             const name: string = serverEntry.name
+            const port: number | undefined = serverEntry.port ?? undefined
 
             let data: ServerData = {
-                ip: `${ip}:${port}`,
-                status: serverEntry.status || "active",
-                links: serverEntry.links || undefined,
-                stars: serverEntry.stars || [],
-                display: serverEntry.display || {}
+                ip: (!port) ? ip : `${ip}:${port}`,
+                status: serverEntry.status ?? "active",
+                links: serverEntry.links ?? undefined,
+                stars: serverEntry.stars ?? [],
+                display: serverEntry.display ?? {},
+                images: serverEntry.images ?? undefined
             }
             if (data.status === "active") {
-                await pingJava(ip, { port }).then( resp => {
+                await pingJava(ip, {port: port ?? 25565}).then(resp => {
                     data.online = true
                     data.version = toVersion(resp.version.protocol)
-                    if (!data.display.favicon) data.display.favicon = resp.favicon || '/pack.png'
+                    if (!data.display.favicon) data.display.favicon = resp.favicon ?? '/pack.png'
                     data.players = {online: resp.players.online, max: resp.players.max}
                 }).catch(() => {
                     data.online = false
                 })
             }
             await storage.setItem(name, data)
-        })
-
-        // console.log(`Servers: ${data.length}`)
-
-    }).catch(() => {
-        console.error("Database issue or no servers found")
-    })
-
+        }
+    } catch (error) {
+        console.error("Failed to fetch servers:", error)
+    }
 }
-
-export default defineNitroPlugin((nitroApp) => {
-    pingServers()
-    const pinger = setInterval(pingServers, 2.5 * 60_000)
-
-    nitroApp.hooks.hook('close', async () => {
-        clearInterval(pinger)
-    })
-})

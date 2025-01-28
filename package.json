@@ -1,8 +1,8 @@
 {
   "name": "meza-servers",
   "author": "envizar",
-  "description": "Современный мониторинг русских мистических Minecraft серверов.",
-  "version": "1.1",
+  "description": "MezaServers - современный мониторинг мистических Minecraft серверов, призванный собрать тематические проекты русскоязычного сообщества крипипаст в одном месте.",
+  "version": "1.2",
   "private": true,
   "type": "module",
   "scripts": {
@@ -11,13 +11,16 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "prod": "nuxt start"
+    "prod": "nuxt start",
+    "eslint": "eslint --ext .js,.ts,.vue ."
   },
   "dependencies": {
     "@minescope/mineping": "^1.5.0",
+    "@nuxt/eslint": "0.7.5",
     "@nuxt/icon": "^1.10.3",
     "@nuxt/image": "1.9.0",
     "@nuxtjs/sitemap": "7.2.2",
+    "eslint": "^8.57.0 || ^9.0.0",
     "mongoose": "^8.9.5",
     "nuxt": "^3.15.2",
     "nuxt-auth-utils": "^0.5.7",

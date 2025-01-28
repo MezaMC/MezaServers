@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import type {ServerLinks} from "~/server/plugins/ping";
+import type {ServerLinks} from "~/server/utils/servers";
 
 const props = defineProps<{
   links?: ServerLinks

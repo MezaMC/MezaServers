@@ -26,7 +26,8 @@ const ver = useRuntimeConfig().public.VER
     <!-- Название и кнопка входа/выхода-->
     <div class="flex flex-row justify-between w-full">
       <div class="flex gap-2 text-xl items-center font-700 decoration-none text-t-contrast">
-        <NuxtIcon name="lucide:server-cog" class="text-2xl" />
+<!--        <NuxtIcon name="lucide:server-cog" class="text-2xl" />-->
+        <NuxtImg src="/logo.svg" alt="logo" />
         <span class="flex gap-0.7">
           MezaServers
           <span class="text-brand text-sm transform-translate-y--0.5">{{ ver }}</span>

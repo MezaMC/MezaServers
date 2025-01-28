@@ -23,7 +23,8 @@ export default defineConfig({
             bg: {
                 body: 'var(--c-bg-body)',
                 main: 'var(--c-bg-main)',
-                card: 'var(--c-bg-card)'
+                card: 'var(--c-bg-card)',
+                cardalt: 'var(--c-bg-card-alt)'
             },
             t: {
                 primary: 'var(--c-text-primary)',

@@ -13,6 +13,7 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxtjs/sitemap',
     'nuxt-seo-utils',
+    '@nuxt/eslint',
   ],
 
   site: {
@@ -30,8 +31,7 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
-    "/": { ssr: false },
-    "/server/**": { prerender: false, ssr: false }, 
+    "/server/**": { prerender: false },
     "/api/**": { prerender: false }
   },
 

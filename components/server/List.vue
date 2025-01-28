@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import type { ServerData } from "~/server/plugins/ping";
+import type { ServerData } from "~/server/utils/servers";
+import LoaderSpinner from "~/components/ui/LoaderSpinner.vue";
 
 type ServersDataType = { [name: string]: ServerData }
 
@@ -26,7 +27,8 @@ const serversDataSorted = computed(() => {
 </script>
 
 <template>
-  <div class="flex flex-col gap-8">
+
+  <div class="flex flex-col gap-8" v-if="serversData">
     <ServerEntry
         :server-data="serverData"
         :server-name="serverName as string"
@@ -35,4 +37,7 @@ const serversDataSorted = computed(() => {
         @update-stars="refetchServersData()"
     />
   </div>
+
+  <LoaderSpinner v-else />
+
 </template>

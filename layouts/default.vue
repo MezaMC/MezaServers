@@ -8,7 +8,7 @@ import UHeader from "~/components/header/UHeader.vue";
     <UHeader />
 
     <main class="block-container">
-      <NuxtPage />
+      <slot />
     </main>
 
     <footer class="block-container">

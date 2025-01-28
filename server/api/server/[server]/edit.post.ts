@@ -1,6 +1,6 @@
-import checkPerms from "~/utils/checkPerms";
-import {ServerData, ServerStatus} from "~/server/plugins/ping";
+import {ServerData} from "~/server/utils/servers";
 import Server from "~/server/models/Server";
+import {checkPerms} from "~/server/utils/perms";
 
 export default defineEventHandler(async (event) => {
 

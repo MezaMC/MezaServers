@@ -11,6 +11,8 @@ useFavicon("/favicon.svg")
 </script>
 
 <template>
-  <NuxtLayout />
-  <Toaster position="bottom-right" theme="dark" rich-colors />
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
+  <Toaster position="bottom-right" theme="dark" />
 </template>

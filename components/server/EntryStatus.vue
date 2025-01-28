@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type {ServerData} from "~/server/plugins/ping";
+import type {ServerData} from "~/server/utils/servers";
 
 const props = defineProps<{
   data: ServerData
