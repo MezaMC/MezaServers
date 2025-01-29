@@ -20,8 +20,10 @@ export async function updatePermsData() {
 export async function checkPerms(session: UserSession, serverName: string): Promise<boolean> {
     if (!session.user) return false
     const userId = session.user.id
+    const permsStorage = useStorage("perms")
+    await permsStorage.clear()
 
-    const userPerms = await useStorage("perms").getItem(userId.toString()) as string[]
+    const userPerms = await permsStorage.getItem(userId.toString()) as string[]
     if (!userPerms) return false
 
     return userPerms.includes(serverName)

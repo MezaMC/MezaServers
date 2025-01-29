@@ -39,9 +39,11 @@ export interface ServerData {
 // Fetch servers from database and ping every active server
 // then save them to nitro storage
 export async function updateServersData() {
-    const storage = useStorage("servers")
+    const serversStorage = useStorage("servers")
     try {
         const serversData = await Server.find()
+
+        await serversStorage.clear()
 
         for (let serverEntry of serversData) {
             if (!serverEntry.ip || !serverEntry.name) return
@@ -68,7 +70,7 @@ export async function updateServersData() {
                     data.online = false
                 })
             }
-            await storage.setItem(name, data)
+            await serversStorage.setItem(name, data)
         }
     } catch (error) {
         console.error("Failed to fetch servers:", error)
