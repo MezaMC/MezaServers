@@ -1,6 +1,7 @@
 import Server from "~/server/models/Server";
 import {pingJava} from "@minescope/mineping";
 import {toVersion} from "~/server/utils/protocolConverter";
+import {resolveDomain} from "~/server/utils/domainResolver";
 
 export interface ServerLinks {
     discord?: string | null,
@@ -39,11 +40,10 @@ export interface ServerData {
 // Fetch servers from database and ping every active server
 // then save them to nitro storage
 export async function updateServersData() {
-    const serversStorage = useStorage("servers")
+    const readyServersData: { [name: string]: ServerData } = {}
+
     try {
         const serversData = await Server.find()
-
-        await serversStorage.clear()
 
         for (let serverEntry of serversData) {
             if (!serverEntry.ip || !serverEntry.name) return
@@ -61,7 +61,8 @@ export async function updateServersData() {
                 images: serverEntry.images ?? undefined
             }
             if (data.status === "active") {
-                await pingJava(ip, {port: port ?? 25565}).then(resp => {
+                const resolvedIp = await resolveDomain(ip, port ?? 25565)
+                await pingJava(resolvedIp.ip, {port: resolvedIp.port}).then(resp => {
                     data.online = true
                     data.version = toVersion(resp.version.protocol)
                     if (!data.display.favicon) data.display.favicon = resp.favicon ?? '/pack.png'
@@ -70,9 +71,19 @@ export async function updateServersData() {
                     data.online = false
                 })
             }
-            await serversStorage.setItem(name, data)
+            readyServersData[name] = data
         }
     } catch (error) {
         console.error("Failed to fetch servers:", error)
+    }
+
+    // Clean storage and write new data to ip
+    // serversStorage.clean() not working somewhy
+    const serversStorage = useStorage("servers")
+    for (let key of await serversStorage.getKeys()) {
+        await serversStorage.removeItem(key)
+    }
+    for (const [name, data] of Object.entries(readyServersData)) {
+        await serversStorage.setItem(name, data)
     }
 }
