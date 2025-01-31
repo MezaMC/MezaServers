@@ -1,46 +1,47 @@
 <script setup lang="ts">
-import { ref } from "vue";
 const props = defineProps<{
   images: string[]
 }>()
 
-const currentIndex = ref<number>(0);
+import emblaCarouselVue from 'embla-carousel-vue'
+const [emblaRef, emblaApi] = emblaCarouselVue({loop: false})
 
-const nextImage = () => {
-  if (currentIndex.value < props.images.length - 1)
-    currentIndex.value++
+const canScrollNext = ref(false)
+const canScrollPrev = ref(false)
+
+const updateCanScroll = () => {
+  canScrollNext.value = emblaApi.value?.canScrollNext() || false
+  canScrollPrev.value = emblaApi.value?.canScrollPrev() || false
 }
 
-const prevImage = () => {
-  if (currentIndex.value > 0)
-    currentIndex.value--
-}
+onMounted(() => {
+  if (!emblaApi.value)
+    return
+
+  emblaApi.value?.on('init', updateCanScroll)
+  emblaApi.value?.on('reInit', updateCanScroll)
+  emblaApi.value?.on('select', updateCanScroll)
+})
+
 </script>
 
 <template>
   <div
-      class="flex flex-row gap-4 lt-sm:gap-0 items-center bg-bg-cardalt h-45vw max-h-100
+      class="flex flex-row gap-3 lt-sm:gap-0 items-center bg-bg-cardalt h-45vw max-h-100
       border-(1px solid sep) p-3 lt-sm:p-0 justify-between rounded-2 w-full box-border"
   >
 
-    <button
-        :disabled="currentIndex === 0"
-        @click="prevImage"
-    >
+    <button @click="emblaApi?.scrollPrev()" :disabled="!canScrollPrev">
       <NuxtIcon name="lucide:chevron-left" />
     </button>
 
-    <NuxtImg
-        :key="currentIndex"
-        :src="images[currentIndex]"
-        alt=""
-        class="max-h-100 h-full max-w-150 object-contain w-full transition-all rounded-2 bg-bg-body min-w-0"
-    />
+    <div class="embla overflow-hidden max-h-100 h-full object-contain w-full flex rounded-2" ref="emblaRef">
+      <div class="embla__container flex w-full h-full">
+        <NuxtImg class="embla__slide flex-grow-1 shrink-0 basis-[100%] max-w-full" v-for="image of images" :src="image" />
+      </div>
+    </div>
 
-    <button
-        :disabled="currentIndex === images.length - 1"
-        @click="nextImage"
-    >
+    <button @click="emblaApi?.scrollNext()" :disabled="!canScrollNext">
       <NuxtIcon name="lucide:chevron-right" />
     </button>
 
