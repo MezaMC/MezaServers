@@ -71,7 +71,6 @@ export async function updateServersData() {
                 }).catch(() => {
                     data.online = false
                 })
-                console.log(`${ip}:${port}`, `${resolvedIp}:${resolvedPort}`, data.online)
             }
             readyServersData[name] = data
         }

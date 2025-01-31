@@ -1,6 +1,6 @@
 <script setup lang="ts">
-
 import StarButton from "~/components/server/StarButton.vue";
+
 const props = defineProps<{
   ip: string
   name: string

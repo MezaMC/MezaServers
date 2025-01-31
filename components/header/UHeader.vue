@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 import LoginButton from "~/components/header/LoginButton.vue";
 
 interface NavLink {
