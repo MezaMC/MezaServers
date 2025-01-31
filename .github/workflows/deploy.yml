@@ -29,17 +29,17 @@ jobs:
           mkdir ~/.ssh
           echo "${{ secrets.OPENSSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+          ssh-keyscan -p ${{ secrets.PORT }} -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
 
       - name: Deploy files with rsync
         run: |
-          rsync -rz meza-servers.nginx.conf root@${{secrets.HOST}}:/etc/nginx/sites-enabled/meza-servers.conf
-          rsync -rz docker-compose.yml Dockerfile root@${{secrets.HOST}}:/opt/meza-servers/
-          rsync -rz --delete --exclude '.env' .output/ root@${{secrets.HOST}}:/opt/meza-servers/app
+          rsync -e "ssh -p ${{ secrets.PORT }}" -rz meza-servers.nginx.conf root@${{secrets.HOST}}:/etc/nginx/sites-enabled/meza-servers.conf
+          rsync -e "ssh -p ${{ secrets.PORT }}" -rz docker-compose.yml Dockerfile root@${{secrets.HOST}}:/opt/meza-servers/
+          rsync -e "ssh -p ${{ secrets.PORT }}" -rz --delete --exclude '.env' .output/ root@${{secrets.HOST}}:/opt/meza-servers/app
 
       - name: Restart docker compose & nginx
         run: |
-          ssh root@${{ secrets.HOST }} << 'EOF'
+          ssh -p ${{ secrets.PORT }} root@${{ secrets.HOST }} << 'EOF'
           cd /opt/meza-servers/
           docker compose build
           docker compose down

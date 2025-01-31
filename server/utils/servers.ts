@@ -50,10 +50,10 @@ export async function updateServersData() {
 
             const ip: string = serverEntry.ip
             const name: string = serverEntry.name
-            const port: number | undefined = serverEntry.port ?? undefined
+            const port: number = serverEntry.port ?? 25565
 
             let data: ServerData = {
-                ip: (!port) ? ip : `${ip}:${port}`,
+                ip: (port == 25565) ? ip : `${ip}:${port}`,
                 status: serverEntry.status ?? "active",
                 links: serverEntry.links ?? undefined,
                 stars: serverEntry.stars ?? [],
@@ -61,8 +61,9 @@ export async function updateServersData() {
                 images: serverEntry.images ?? undefined
             }
             if (data.status === "active") {
-                const resolvedIp = await resolveDomain(ip, port ?? 25565)
-                await pingJava(resolvedIp.ip, {port: resolvedIp.port}).then(resp => {
+                const { ip: resolvedIp, port: resolvedPort } = await resolveDomain(ip, port)
+
+                await pingJava(resolvedIp, {port: resolvedPort}).then(resp => {
                     data.online = true
                     data.version = toVersion(resp.version.protocol)
                     if (!data.display.favicon) data.display.favicon = resp.favicon ?? '/pack.png'
@@ -70,6 +71,7 @@ export async function updateServersData() {
                 }).catch(() => {
                     data.online = false
                 })
+                console.log(`${ip}:${port}`, `${resolvedIp}:${resolvedPort}`, data.online)
             }
             readyServersData[name] = data
         }
