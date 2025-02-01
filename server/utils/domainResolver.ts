@@ -8,18 +8,27 @@ export async function resolveDomain(initDomain: string, initPort: number): Promi
 
     // Unwrap SRV record (if exists)
     try {
-        const srvDomain = `_minecraft._tcp.${domain}`;
-        const srvRecords = await dns.resolveSrv(srvDomain);
+        const srvDomain = `_minecraft._tcp.${domain}`
+        const srvRecords = await dns.resolveSrv(srvDomain)
         if (srvRecords.length > 0) {
-            const srv = srvRecords[0];
+            const srv = srvRecords[0]
             domain = srv.name
             port = srv.port
         }
     } catch {}
 
+    // Unwrap CNAME chain (if exists)
+    try {
+        while (true) {
+            const cnameRecords = await dns.resolveCname(domain)
+            if (cnameRecords.length == 0) break
+            domain = cnameRecords[0]
+        }
+    } catch {}
+
     // Unwrap A record (if exists)
     try {
-        const aRecords = await dns.resolve4(domain);
+        const aRecords = await dns.resolve4(domain)
         if (aRecords.length > 0) {
             domain = aRecords[0]
         }

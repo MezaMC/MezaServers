@@ -63,7 +63,7 @@ export async function updateServersData() {
             if (data.status === "active") {
                 const { ip: resolvedIp, port: resolvedPort } = await resolveDomain(ip, port)
 
-                await pingJava(resolvedIp, {port: resolvedPort}).then(resp => {
+                await pingJava(resolvedIp, { port: resolvedPort, virtualHost: ip, protocolVersion: 0 }).then(resp => {
                     data.online = true
                     data.version = toVersion(resp.version.protocol)
                     if (!data.display.favicon) data.display.favicon = resp.favicon ?? '/pack.png'

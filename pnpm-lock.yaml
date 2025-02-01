@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@minescope/mineping':
-        specifier: ^1.5.0
-        version: 1.5.0
+        specifier: github:envizar/mineping
+        version: https://codeload.github.com/envizar/mineping/tar.gz/795831ab2bff41f1f3aecc417764417e0ee53761
       '@nuxt/eslint':
         specifier: 0.7.5
         version: 0.7.5(@vue/compiler-sfc@3.5.13)(eslint@9.19.0(jiti@2.4.2))(magicast@0.3.5)(rollup@4.32.1)(typescript@5.7.3)(vite@6.0.11(@types/node@22.12.0)(jiti@2.4.2)(sass@1.83.4)(terser@5.37.0)(tsx@4.19.2)(yaml@2.7.0))
@@ -692,8 +692,9 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  '@minescope/mineping@1.5.0':
-    resolution: {integrity: sha512-20dW/Z/oJzWa4lwOuLy6HTGUoBrSuE0BYHvKmAn3O8IPQdxjTE07yaPaUN5xIR1kc4aAuAO6Mol495cmsaPgEQ==}
+  '@minescope/mineping@https://codeload.github.com/envizar/mineping/tar.gz/795831ab2bff41f1f3aecc417764417e0ee53761':
+    resolution: {tarball: https://codeload.github.com/envizar/mineping/tar.gz/795831ab2bff41f1f3aecc417764417e0ee53761}
+    version: 1.5.0
     engines: {node: '>=14'}
 
   '@mongodb-js/saslprep@1.1.9':
@@ -5178,7 +5179,7 @@ snapshots:
       - encoding
       - supports-color
 
-  '@minescope/mineping@1.5.0': {}
+  '@minescope/mineping@https://codeload.github.com/envizar/mineping/tar.gz/795831ab2bff41f1f3aecc417764417e0ee53761': {}
 
   '@mongodb-js/saslprep@1.1.9':
     dependencies:

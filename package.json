@@ -16,7 +16,7 @@
     "eslint": "eslint --ext .js,.ts,.vue ."
   },
   "dependencies": {
-    "@minescope/mineping": "^1.5.0",
+    "@minescope/mineping": "github:envizar/mineping",
     "@nuxt/eslint": "0.7.5",
     "@nuxt/icon": "^1.10.3",
     "@nuxt/image": "1.9.0",
