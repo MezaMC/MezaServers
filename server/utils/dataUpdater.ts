@@ -6,9 +6,9 @@ export default function registerDataUpdater(
     intervalMinutes: number
 ) {
     updateFunction();
-    const updater = setInterval(updateFunction, intervalMinutes * 60_000);
+    const updater = setInterval(updateFunction, intervalMinutes * 60_000)
 
     nitroApp.hooks.hookOnce('close', () => {
-        clearInterval(updater);
+        clearInterval(updater)
     });
 }

@@ -1,10 +1,30 @@
 <script setup lang="ts">
 import LoaderSpinner from "~/components/ui/LoaderSpinner.vue";
+import HSep from "~/components/ui/HSep.vue";
+import Links from "~/components/ui/Links.vue";
 
 useSeoMeta({ title: "Список серверов" })
 const loaded = ref(false)
 
 onMounted(() => loaded.value = true)
+
+const linksData = [
+  {
+    icon: "tabler:brand-github",
+    href: "https://github.com/MezaMC/MezaServers",
+    label: "GitHub"
+  },
+  {
+    icon: "tabler:brand-telegram",
+    href: "https://t.me/meza_inc",
+    label: "Telegram"
+  },
+  {
+    icon: "tabler:brand-discord",
+    href: "https://ds.meza.one",
+    label: "Discord"
+  }
+]
 </script>
 
 <template>
@@ -16,8 +36,9 @@ onMounted(() => loaded.value = true)
   </ClientOnly>
   <LoaderSpinner v-else />
 
-  <!-- For SEO -->
-  <p class="text-t-secondary m-t-6 m-b-0">
+  <HSep>О проекте</HSep>
+
+  <p>
     Мониторинг мистических Minecraft серверов MezaServers
     - уникальный проект, призванный собрать мистические
     сервера русскоязычного сообщества Майнкрафт крипипаст
@@ -25,5 +46,17 @@ onMounted(() => loaded.value = true)
     игроку посетить аномальные, жуткие и загадочные сервера
     нашего малоизвестного комьюнити.
   </p>
+
+  <p class="">
+    Сервера с мистикой - особый тип Minecraft серверов, на которых
+    можно встретить различные аномалии. Такие сервера могут
+    пугать своей хоррор составляющей или давить мрачной и
+    загадочной атмосферой. Нередко на таких проектах обитают
+    мифы и подобные загадочные существа.
+  </p>
+
+  <HSep>Ссылки</HSep>
+
+  <Links :data="linksData" />
 
 </template>

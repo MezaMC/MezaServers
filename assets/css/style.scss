@@ -39,12 +39,13 @@ h1 {
   font-size: 2rem;
   color: var(--c-text-contrast);
   border-bottom: 2px solid var(--c-sep);
-  margin: 0 0 1rem;
+  margin: 0 0 1.5rem;
   @apply "lt-phone:text-[1.75rem]";
 }
 
 p {
   line-height: 28px;
   @apply "lt-phone:line-height-[24px]";
-  margin: 0.75rem 0;
+  margin: 1rem 0;
+  @apply "indent-sm";
 }

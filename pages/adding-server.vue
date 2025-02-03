@@ -19,13 +19,11 @@ useSeoMeta({ title: "Добавление сервера" })
     серверам на бесплатных хостингах отсеивает большинство низкокачественных проектов.
   </p>
 
-  <div class="flex items-center justify-center w-full mt-8">
-    <UButton
-        type="outline" icon="lucide:file-plus-2" :target-blank="true"
-        href="https://github.com/MezaMC/MezaServers/issues/new?labels=%D0%A1%D0%B5%D1%80%D0%B2%D0%B5%D1%80&template=new-server.yml"
-    >
-      Форма для добавления
-    </UButton>
-  </div>
+  <UButton
+      type="outline" icon="lucide:file-plus-2" :target-blank="true" class="mt-8"
+      href="https://github.com/MezaMC/MezaServers/issues/new?labels=%D0%A1%D0%B5%D1%80%D0%B2%D0%B5%D1%80&template=new-server.yml"
+  >
+    Форма для добавления
+  </UButton>
 
 </template>

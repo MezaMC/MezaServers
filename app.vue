@@ -4,7 +4,7 @@ import 'assets/css/style.scss'
 import {Toaster} from "vue-sonner";
 
 useSeoMeta({
-  titleTemplate: "%s • MezaServers",
+  titleTemplate: "%s • Мониторинг MezaServers",
 })
 
 useFavicon("/favicon.svg")

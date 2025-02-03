@@ -57,19 +57,19 @@ div {
 }
 
 .type-outline {
-  --opacity-outline: 0.4;
-  --opacity-bg: 0.04;
+  --opacity-outline: 0.3;
+  --opacity-bg: 0.03;
   outline: 1px solid rgba(var(--color), var(--opacity-outline));
   background-color: rgba(var(--color), var(--opacity-bg));
 
   &:hover {
-    --opacity-outline: 0.5;
-    --opacity-bg: 0.08;
+    --opacity-outline: 0.4;
+    --opacity-bg: 0.04;
   }
 
   &:active {
-    --opacity-outline: 0.7;
-    --opacity-bg: 0.12;
+    --opacity-outline: 0.6;
+    --opacity-bg: 0.08;
     color: color-mix(in srgb, rgb(var(--color)), white 40%);
   }
 }

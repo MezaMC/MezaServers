@@ -5,6 +5,8 @@ import UHeader from "~/components/header/UHeader.vue";
 <template>
   <div class="content">
 
+    <AdBanner />
+
     <UHeader />
 
     <main class="block-container">

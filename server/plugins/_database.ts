@@ -1,4 +1,5 @@
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
+import {sleep} from '~/server/utils/sleep'
 
 export default defineNitroPlugin(nitroApp => {
     const config = useRuntimeConfig()
@@ -20,8 +21,7 @@ export default defineNitroPlugin(nitroApp => {
     
     // Close connection
     nitroApp.hooks.hookOnce('close', async () => {
-        console.log("Shutting down server...")
-        await new Promise((resolve) => setTimeout(resolve, 500));
+        await sleep(500)
         try {
             await mongoose.connection.close()
             console.log('MongoDB connection closed')

@@ -11,7 +11,6 @@ interface NavLink {
 const navLinks: Array<NavLink> = [
   { text: "Главная", link: "/", icon: "lucide:home" },
   { text: "Добавить сервер", link: "/adding-server", icon: "lucide:circle-plus" },
-  { text: "О проекте", link: "/about", icon: "lucide:book" },
   { text: "ЧаВо", link: "/faq", icon: "lucide:message-circle-question" },
   { text: "Telegram", link: "https://t.me/meza_inc", icon: "tabler:brand-telegram", external: true },
 ]
