@@ -30,14 +30,33 @@ onMounted(checkBannerVisibility)
 </script>
 
 <template>
-  <div v-if="showBanner" class="w-full flex justify-between bg-bg-card rounded-2 p-(l-4 r-2 2) box-border">
+  <div v-if="showBanner" class="w-full flex justify-between bg-bg-card rounded-2 p-(l-4 r-2 2) box-border banner">
     <div class="flex items-center gap-3">
       <NuxtImg src="https://new.play2go.cloud/logo/light.svg" class="w-8 h-8" />
       <span>
-        <b>Play2GO</b> - мощный и недорогой Minecraft/VDS хостинг.
+        <b>Play2GO</b> &mdash; мощный и недорогой Minecraft/VDS хостинг.
         <NuxtLink to="https://p2g.meza.one" target="_blank">Перейти</NuxtLink>
       </span>
     </div>
-    <UButton icon="lucide:x" @click="closeBanner()" class="w-6 h-5" />
+    <UButton icon="lucide:x" @click="closeBanner()" class="w-6 h-5 close-button" />
   </div>
 </template>
+
+<style scoped lang="scss">
+.banner {
+  background: linear-gradient(
+          60deg,
+          #250107,
+          #060404
+  );
+}
+
+a {
+  color: #FF86AB;
+  text-decoration-color: #FF86AB55;
+}
+
+.close-button {
+  --color: 255, 134, 171;
+}
+</style>
