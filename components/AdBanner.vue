@@ -30,16 +30,22 @@ onMounted(checkBannerVisibility)
 </script>
 
 <template>
-  <div v-if="showBanner" class="w-full flex justify-between bg-bg-card rounded-2 p-(l-4 r-2 2) box-border banner">
-    <div class="flex items-center gap-3">
-      <NuxtImg src="https://new.play2go.cloud/logo/light.svg" class="w-8 h-8" />
-      <span>
-        <b>Play2GO</b> &mdash; мощный и недорогой Minecraft/VDS хостинг.
-        <NuxtLink to="https://p2g.meza.one" target="_blank">Перейти</NuxtLink>
-      </span>
+  <transition name="collapse">
+    <div
+        v-if="showBanner"
+        class="w-full flex justify-between bg-bg-card rounded-2 p-(l-4 r-2 2) box-border banner
+        border-(2 solid #FF86AB55) hover:border-#FF86AB99 transition"
+    >
+      <div class="flex items-center gap-3">
+        <NuxtImg src="/p2g-logo.svg" class="w-8 h-8" />
+        <span>
+          <b>Play2GO</b> &mdash; мощный и недорогой Minecraft/VDS хостинг.
+          <NuxtLink to="https://p2g.meza.one" target="_blank">Перейти</NuxtLink>
+        </span>
+      </div>
+      <UButton icon="lucide:x" @click="closeBanner()" class="w-6 h-5 close-button" />
     </div>
-    <UButton icon="lucide:x" @click="closeBanner()" class="w-6 h-5 close-button" />
-  </div>
+  </transition>
 </template>
 
 <style scoped lang="scss">
@@ -58,5 +64,16 @@ a {
 
 .close-button {
   --color: 255, 134, 171;
+}
+
+.collapse-enter-active,
+.collapse-leave-active {
+  transition: transform 150ms ease-in-out, opacity 200ms ease-in-out;
+}
+
+.collapse-enter-from,
+.collapse-leave-to {
+  transform: scaleY(0);
+  opacity: 0;
 }
 </style>

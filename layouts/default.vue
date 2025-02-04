@@ -17,7 +17,7 @@ import UHeader from "~/components/header/UHeader.vue";
       <span>Выпущено под
         <NuxtLink to="https://github.com/MezaMC/MezaServers/blob/main/LICENSE" target="_blank">лицензией MIT</NuxtLink>
       </span>
-      <span>Copyright © 2025 - {{(new Date()).getFullYear()}}
+      <span>Copyright © {{(new Date()).getFullYear()}}
         <NuxtLink to="https://envizar.meza.one" target="_blank">envizar</NuxtLink>
       </span>
     </footer>
