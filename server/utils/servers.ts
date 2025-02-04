@@ -30,11 +30,7 @@ export interface ServerData {
         name?: string | null
     },
     stars: number[],
-    images?: string[],
-
-    // Used only when requesting /api/server/:serverName/
-    // to display edit server elements
-    hasPerms?: boolean
+    images?: string[]
 }
 
 // Fetch servers from database and ping every active server

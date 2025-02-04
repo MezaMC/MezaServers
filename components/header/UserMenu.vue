@@ -11,7 +11,7 @@ onMounted(() => document.addEventListener('click', event => {
     if (!event.target.closest('.dropdown')) isOpen.value = false
 }))
 onBeforeUnmount(() => document.removeEventListener('click', () => {}))
-const adminState = useState<boolean>('isAdmin', () => false)
+const { isAdmin } = useUserPerms()
 </script>
 
 <template>
@@ -26,7 +26,7 @@ const adminState = useState<boolean>('isAdmin', () => false)
                 router-link="/admin/perms"
                 type="link"
                 icon="lucide:user-cog"
-                v-if="adminState"
+                v-if="isAdmin"
                 @click="isOpen = false"
             >Панель прав</UButton>
 

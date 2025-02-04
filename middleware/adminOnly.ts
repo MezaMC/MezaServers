@@ -1,12 +1,12 @@
-import {toast} from "vue-sonner";
+import {useUserPerms} from "~/composables/useUserPerms";
 
 export default defineNuxtRouteMiddleware((to, from) => {
     // Ensure clientside
     if (import.meta.server) return
 
-    const adminState = useState<boolean>('isAdmin', () => false)
+    const { isAdmin } = useUserPerms()
 
-    if (!adminState.value) {
+    if (!isAdmin.value) {
         return navigateTo('/')
     }
 });

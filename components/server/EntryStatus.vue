@@ -10,7 +10,17 @@ const props = defineProps<{
 
   <div class="flex gap-2.5 items-center">
 
-    <template v-if="data.online === true">
+    <template v-if="data.status === 'maintenance'">
+      <div class="bg-blue-5 shadow-blue-6 indicator" />
+      <span class="text-t-secondary">Технические работы</span>
+    </template>
+
+    <template v-else-if="data.status === 'frozen'">
+      <div class="bg-gray-5 shadow-gray-6 indicator" />
+      <span class="text-t-secondary">Временно заморожен</span>
+    </template>
+
+    <template v-else-if="data.online === true">
       <div class="bg-green shadow-green indicator" />
       <span v-if="data.players?.online !== undefined && data.players?.max !== undefined" class="flex gap-1">
         <span class="text-t-secondary">Онлайн:</span>
@@ -20,16 +30,6 @@ const props = defineProps<{
         <div class="w-[1px] h-4 bg-sep" />
         <span class="flex gap-1"><span class="lt-phone:hidden text-t-secondary">Версия:</span> {{ data.version }}</span>
       </template>
-    </template>
-
-    <template v-else-if="data.status === 'maintenance'">
-      <div class="bg-blue-5 shadow-blue-6 indicator" />
-      <span class="text-t-secondary">Технические работы</span>
-    </template>
-
-    <template v-else-if="data.status === 'frozen'">
-      <div class="bg-gray-5 shadow-gray-6 indicator" />
-      <span class="text-t-secondary">Временно заморожен</span>
     </template>
 
     <template v-else>

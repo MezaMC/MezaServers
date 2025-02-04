@@ -30,15 +30,9 @@ updateServerData(false)
         @update-stars="updateServerData()"
     />
     <StatusSwitch
-        v-if="serverData.hasPerms"
         :init-status="serverData.status"
         :server-name="serverName"
         @update-status="updateServerData()"
-    />
-    <Carousel
-        :class="{ 'mt4': !serverData.hasPerms }"
-        :images="serverData.images"
-        v-if="serverData.images !== undefined && serverData.images.length != 0"
     />
   </template>
   <LoaderSpinner v-else />

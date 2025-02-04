@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
 
     const serverName = event.context.params?.server as string
     const serverEntry = await Server.findOne({name: serverName})
-    if (!serverEntry) return {"error": "server not found"}
+    if (!serverEntry) return {"error": "server not found in database"}
 
     const hasPerm = await checkPerms(session, serverName)
     if (!hasPerm) return {"error": "no perms"}
@@ -28,6 +28,8 @@ export default defineEventHandler(async (event) => {
         if (storageData) {
             storageData.status = serverEntry.status!
             await storage.setItem(serverName, storageData)
+        } else {
+            return {"error": "server not found in storage"}
         }
 
     }

@@ -18,10 +18,6 @@ export default defineEventHandler(async (event) => {
         })
     }
 
-    const session = await getUserSession(event)
-
-    serverData!.hasPerms = session.user && (await checkPerms(session, serverName))
-
     return serverData
 
 })

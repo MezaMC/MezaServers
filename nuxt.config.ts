@@ -32,6 +32,7 @@ export default defineNuxtConfig({
 
   routeRules: {
     "/server/**": { prerender: false },
+    "/server/*/edit": { ssr: false },
     "/api/**": { prerender: false },
     "/auth/**": { prerender: false },
     "/admin/**": { prerender: false, ssr: false, appMiddleware: "admin-only" }
