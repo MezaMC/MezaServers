@@ -37,7 +37,7 @@ onMounted(checkBannerVisibility)
         border-(2 solid #FF86AB55) hover:border-#FF86AB99 transition"
     >
       <div class="flex items-center gap-3">
-        <NuxtImg src="/p2g-logo.svg" class="w-8 h-8" />
+        <img src="/p2g-logo.svg" alt="p2g-logo" class="w-8 h-8" />
         <span>
           <b>Play2GO</b> &mdash; мощный и недорогой Minecraft/VDS хостинг.
           <NuxtLink to="https://p2g.meza.one" target="_blank">Перейти</NuxtLink>
