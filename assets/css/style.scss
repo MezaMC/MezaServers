@@ -49,3 +49,30 @@ p {
   margin: 1rem 0;
   @apply "indent-sm";
 }
+
+input {
+  background: var(--c-bg-card-alt);
+  color: var(--c-text-contrast);
+  font-family: "JetBrains Mono", monospace;
+  border: 1px solid var(--c-sep);
+  padding: 4px 8px;
+  border-radius: 0.25rem;
+  &:focus {
+    outline: none;
+    border: 1px solid var(--c-sep-accent);
+  }
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  &[type=number] {
+    -moz-appearance: textfield;
+  }
+}
+
+button {
+  all: unset;
+}

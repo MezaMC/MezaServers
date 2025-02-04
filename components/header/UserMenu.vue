@@ -8,9 +8,10 @@ const toggleDropdown = () => isOpen.value = !isOpen.value;
 onMounted(() => document.addEventListener('click', event => {
   if (event.target == null) return
   if (!(event.target instanceof Element)) return
-    if (!event.target.closest('.dropdown')) isOpen.value = false;
-}));
-onBeforeUnmount(() => document.removeEventListener('click', () => {}));
+    if (!event.target.closest('.dropdown')) isOpen.value = false
+}))
+onBeforeUnmount(() => document.removeEventListener('click', () => {}))
+const adminState = useState<boolean>('isAdmin', () => false)
 </script>
 
 <template>
@@ -19,8 +20,22 @@ onBeforeUnmount(() => document.removeEventListener('click', () => {}));
 
       <div class="dropdown">
         <transition>
-          <div v-if="isOpen" class="logout-dropdown">
-            <UButton @click="clear" type="link" icon="lucide:log-out">Выйти</UButton>
+          <div v-if="isOpen" class="dropdown-container flex flex-col">
+
+            <UButton
+                router-link="/admin/perms"
+                type="link"
+                icon="lucide:user-cog"
+                v-if="adminState"
+                @click="isOpen = false"
+            >Панель прав</UButton>
+
+            <UButton
+                @click="clear"
+                type="link"
+                icon="lucide:log-out"
+            >Выйти</UButton>
+
           </div>
         </transition>
         <UButton
@@ -49,7 +64,7 @@ onBeforeUnmount(() => document.removeEventListener('click', () => {}));
   display: inline-block;
 }
 
-.logout-dropdown {
+.dropdown-container {
   background-color: var(--c-bg-main);
   outline: 1px solid var(--c-sep);
   border-radius: 4px;
@@ -59,6 +74,10 @@ onBeforeUnmount(() => document.removeEventListener('click', () => {}));
   padding: 10px;
   z-index: 10;
   box-shadow: var(--c-shadow) 0 0 16px;
+  width: max-content;
+  > * {
+    @apply min-w-full box-border;
+  }
 }
 
 .v-enter-active,

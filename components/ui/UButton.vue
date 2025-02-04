@@ -1,32 +1,33 @@
 <script setup lang="ts">
 const props = defineProps<{
-  routerLink?: string;
-  href?: string;
-  icon?: string;
-  type?: 'link' | 'outline';
-  color?: string;
-  img?: string;
-  size?: string;
-  targetBlank?: boolean;
-  inactive?: boolean;
+  routerLink?: string
+  href?: string
+  icon?: string
+  type?: 'link' | 'outline'
+  color?: string
+  img?: string
+  size?: string
+  targetBlank?: boolean
+  inactive?: boolean
 }>();
 
-const slots = useSlots();
-const padding = slots.default ? '0.5rem 0.8rem' : '0.5rem';
-let redirecting = false;
+const slots = useSlots()
+const padding = slots.default ? '0.5rem 0.8rem' : '0.5rem'
+let redirecting = false
 
 function handleClick() {
-  if (props.inactive) return;
+  if (props.inactive) return
   if (props.routerLink) {
-    useRouter().push(props.routerLink);
-    return;
+    useRouter().push(props.routerLink)
+    return
   }
   if (props.href && !redirecting) {
     if (props.targetBlank) {
-      window.open(props.href, '_blank');
+      window.open(props.href, '_blank')
     } else {
-      window.location.href = props.href;
-      redirecting = true;
+      window.location.href = props.href
+      redirecting = true
+      setTimeout(() => redirecting = false, 5000)
     }
   }
 }
@@ -59,7 +60,7 @@ div {
 .type-outline {
   --opacity-outline: 0.3;
   --opacity-bg: 0.03;
-  outline: 1px solid rgba(var(--color), var(--opacity-outline));
+  border: 1px solid rgba(var(--color), var(--opacity-outline));
   background-color: rgba(var(--color), var(--opacity-bg));
 
   &:hover {

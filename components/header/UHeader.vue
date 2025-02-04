@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import LoginButton from "~/components/header/LoginButton.vue";
+import UserMenu from "~/components/header/UserMenu.vue";
 
 interface NavLink {
   text: string
@@ -32,7 +32,7 @@ const label = useRuntimeConfig().public.LABEL
         </span>
       </div>
       <div class="flex items-center gap-2">
-        <LoginButton />
+        <UserMenu />
       </div>
     </div>
 
