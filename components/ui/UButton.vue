@@ -9,6 +9,7 @@ const props = defineProps<{
   size?: string
   targetBlank?: boolean
   inactive?: boolean
+  loading?: boolean
 }>()
 
 const slots = useSlots()
@@ -43,7 +44,8 @@ function handleClick() {
     }"
   >
     <NuxtImg v-if="props.img" :src="props.img" alt="avatar" class="w-5 h-5 rounded-full" />
-    <NuxtIcon v-if="props.icon" :name="props.icon" class="w-5 h-5" />
+    <NuxtIcon v-if="props.icon && !loading" :name="props.icon" class="w-5 h-5" />
+    <NuxtIcon v-else-if="loading" name="lucide:loader-circle" class="w-5 h-5 animate-spin" />
     <slot />
   </div>
 </template>

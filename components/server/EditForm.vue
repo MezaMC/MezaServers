@@ -53,7 +53,7 @@ const validationSchema = toTypedSchema(
     })
 )
 
-const { handleSubmit, errors, values } = useForm({ validationSchema, initialValues: initialValues.value as any })
+const { handleSubmit, errors, values, isSubmitting } = useForm({ validationSchema, initialValues: initialValues.value as any })
 
 const sortStringify = (obj: any) => JSON.stringify(obj,
     (_, value) => (typeof value === 'object' && value !== null) ?
@@ -85,21 +85,24 @@ const images = useField<string[] | undefined>('images').value
 const links = useField<{[key: string]: string} | undefined>('links').value
 
 const onSubmit = handleSubmit(async () => {
-  const resp: any = await $fetch(`/api/server/${serverData.value.name}/edit`, {
-    method: 'post',
+  await $fetch(`/api/server/${serverData.value.name}/edit`, {
+    method: 'POST',
     body: {
       data: editedValues.value
+    },
+
+    async onResponse({ response }) {
+      await refresh()
+      toast.success(response._data.message)
+    },
+
+    onResponseError({ response }) {
+      toast.error(response._data.message)
     }
   })
-  if (resp.status === "ok") {
-    await refresh()
-    toast.success("Данные были сохранены")
-  } else if (resp.status === "error") {
-    toast.error(resp.message)
-  }
 })
 
-const isDisabled = computed(() => Object.keys(editedValues.value).length === 0 || Object.keys(errors.value).length !== 0)
+const isDisabled = computed(() => Object.keys(editedValues.value).length === 0 || Object.keys(errors.value).length !== 0 || isSubmitting.value)
 
 const imagesString = computed({
   get: () => images.value?.join('\n'),
@@ -133,7 +136,7 @@ const linksString = computed({
 </script>
 
 <template>
-  <form @submit="onSubmit" class="flex flex-col gap-14 mt-10 max-w-full overflow-hidden">
+  <form @submit="onSubmit" class="flex flex-col gap-12 mt-10 max-w-full overflow-hidden">
 
     <div class="grid gap-4 cols-3 lt-sm:cols-2 lt-phone:cols-1">
 
@@ -196,7 +199,7 @@ const linksString = computed({
         <span class="error-message" v-if="errors.links">{{ errors.links }}</span>
       </div>
       <button type="submit" class="mt-4" :disabled="isDisabled">
-        <UButton icon="lucide:save" :inactive="isDisabled">Сохранить</UButton>
+        <UButton icon="lucide:save" :inactive="isDisabled" :loading="isSubmitting">Сохранить</UButton>
       </button>
     </div>
 

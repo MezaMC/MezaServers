@@ -1,4 +1,4 @@
-import dns from 'dns/promises';
+import dns from 'dns/promises'
 
 export async function resolveDomain(initDomain: string, initPort: number): Promise<{ ip: string; port: number }> {
 

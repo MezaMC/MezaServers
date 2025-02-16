@@ -2,9 +2,9 @@
 import type {ServerData} from "~/server/utils/servers";
 import {useServerValues} from "~/composables/useServerValues";
 
-const serverData = inject<Ref<ServerData>>("server")!
+const serverData = inject<Ref<ServerData>>("server")
 
-const { descHtml } = useServerValues(serverData)
+const { descHtml } = useServerValues(serverData!)
 </script>
 
 <template>

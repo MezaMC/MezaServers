@@ -37,55 +37,80 @@ export interface ServerData {
     images?: string[]
 }
 
+async function getServerNames(): Promise<Set<string> | null> {
+    try {
+        const serverEntries = await Server.find()
+        return new Set(serverEntries
+            .map(serverEntry => serverEntry.name)
+            .filter(serverName => serverName != null))
+    } catch {
+        return null
+    }
+}
+
 // Fetch servers from database and ping every active server
 // then save them to nitro storage
 export async function updateServersData() {
-    const readyServersData: { [name: string]: ServerData } = {}
+    const serverNames = await getServerNames()
+    if (!serverNames) return
+    const serversStorage = useStorage("servers")
+    const serverNamesDeleted = (await serversStorage.getKeys()).filter(key => !serverNames.has(key))
+
+    for (const key of serverNamesDeleted)
+        await serversStorage.removeItem(key)
+
+    for (const serverName of serverNames)
+        await updateServerData(serverName)
+}
+
+export async function updateServerData(serverName: string, timeout: number = 5000) {
+    const serversStorage = useStorage("servers")
+    const serverData = await fetchServerData(serverName, timeout)
+    if (!serverData) return
+    await serversStorage.setItem(serverName, serverData)
+}
+
+async function fetchServerData(serverName: string, timeout: number): Promise<ServerData | null> {
+
+    let serverData: ServerData
 
     try {
-        const serversData = await Server.find()
+        const serverEntry = await Server.findOne({name: serverName})
 
-        for (let serverEntry of serversData) {
-            if (!serverEntry.ip || !serverEntry.name) return
+        if (!serverEntry || !serverEntry.ip || !serverEntry.name) return null
 
-            const ip: string = serverEntry.ip
-            const name: string = serverEntry.name
-            const port: number | undefined = serverEntry.port ?? undefined
+        const name = serverEntry.name
+        const ip = serverEntry.ip
+        const port = serverEntry.port ?? undefined
 
-            let data: ServerData = {
-                name, ip, port,
-                status: serverEntry.status ?? "active",
-                desc: serverEntry.desc ?? undefined,
-                links: serverEntry.links ?? undefined,
-                stars: serverEntry.stars ?? [],
-                display: serverEntry.display ?? {},
-                images: serverEntry.images ?? undefined
-            }
-            if (data.status === "active") {
-                const { ip: resolvedIp, port: resolvedPort } = await resolveDomain(ip, port ?? 25565)
-
-                await pingJava(resolvedIp, { port: resolvedPort, virtualHost: ip, protocolVersion: 769 }).then(resp => {
-                    data.online = true
-                    data.version = toVersion(resp.version.protocol)
-                    if (!data.display.favicon) data.display.favicon = resp.favicon ?? undefined
-                    data.players = {online: resp.players.online, max: resp.players.max}
-                }).catch(() => {
-                    data.online = false
-                })
-            }
-            readyServersData[name] = data
+        serverData = {
+            name, ip, port,
+            status: serverEntry.status ?? "active",
+            desc: serverEntry.desc ?? undefined,
+            links: serverEntry.links ?? undefined,
+            stars: serverEntry.stars ?? [],
+            display: serverEntry.display ?? {},
+            images: serverEntry.images ?? undefined
         }
-    } catch (error) {
-        console.error("Failed to fetch servers:", error)
-    }
 
-    // Clean storage and write new data to ip
-    // serversStorage.clean() not working somewhy
-    const serversStorage = useStorage("servers")
-    for (let key of await serversStorage.getKeys()) {
-        await serversStorage.removeItem(key)
-    }
-    for (const [name, data] of Object.entries(readyServersData)) {
-        await serversStorage.setItem(name, data)
+        // If server is active resolve adress then ping
+        if (serverData.status === "active") {
+            const { ip: resolvedIp, port: resolvedPort } = await resolveDomain(ip, port ?? 25565)
+
+            await pingJava(resolvedIp, { port: resolvedPort, virtualHost: ip, protocolVersion: 769, timeout }).then(resp => {
+                serverData.online = true
+                serverData.version = toVersion(resp.version.protocol)
+                if (!serverData.display.favicon) serverData.display.favicon = resp.favicon ?? undefined
+                serverData.players = {online: resp.players.online, max: resp.players.max}
+            }).catch(() => {
+                serverData.online = false
+            })
+        }
+
+        return serverData
+
+    } catch (error) {
+        console.error(`Failed to fetch server ${serverName}:`, error)
+        return null
     }
 }

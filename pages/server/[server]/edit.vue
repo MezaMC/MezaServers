@@ -11,10 +11,14 @@ definePageMeta({
 const serverId = useRoute().params.server as string
 const loaded = ref(false)
 
-onMounted(() => loaded.value = true)
-
 const { checkPerm } = useUserPerms()
-const hasPerm = checkPerm(serverId).value
+
+onMounted(() => {
+  if (!checkPerm(serverId).value)
+    showError({statusCode: 403, message: "Недостаточно прав."})
+
+  loaded.value = true
+})
 </script>
 
 <template>

@@ -10,5 +10,5 @@ export default function registerDataUpdater(
 
     nitroApp.hooks.hookOnce('close', () => {
         clearInterval(updater)
-    });
+    })
 }

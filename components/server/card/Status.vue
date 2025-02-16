@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import type {ServerData} from "~/server/utils/servers";
 
-const serverData = inject<Ref<ServerData>>("server")!
+const serverData = inject<Ref<ServerData>>("server")
 </script>
 
 <template >
 
-  <div class="flex gap-2.5 items-center">
+  <div class="flex gap-2.5 items-center" v-if="serverData">
 
     <template v-if="serverData.status === 'maintenance'">
       <div class="bg-blue-5 shadow-blue-6 indicator" />

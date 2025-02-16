@@ -7,7 +7,5 @@ provide('server', computed(() => props.serverData))
 </script>
 
 <template>
-  <div>
-    <slot />
-  </div>
+  <div><slot /></div>
 </template>
