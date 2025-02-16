@@ -8,7 +8,7 @@ const props = defineProps<{
   serverName: string
 }>()
 
-const { data: serverData, refresh, error } = await useFetch<ServerData>(`/api/server/${props.serverName}`, {
+const { data: serverData, refresh } = await useFetch<ServerData>(`/api/server/${props.serverName}`, {
   onResponseError({ response }) {
     showError({
       statusCode: response._data.statusCode,
@@ -32,7 +32,7 @@ provide<() => Promise<void>>('refreshFun', updateServerData)
 </script>
 
 <template>
-  <ServerContext :server-data="serverData" v-if="serverData" class="flex flex-col gap-8">
+  <ServerContext :server-data="serverData" v-if="serverData" class="flex flex-col gap-4">
     <ServerCardRoot />
 
     <MDC v-if="serverData.desc" :value="DOMPurify.sanitize(serverData.desc)" />

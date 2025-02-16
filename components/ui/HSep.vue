@@ -1,7 +1,7 @@
 <template>
   <div class="flex w-full justify-center items-center mt-6 gap-4 mb-4">
 
-    <hr class="w-6% h-0">
+    <hr class="w-6% h-0 lt-phone:hidden">
 
     <h2 class="m-0">
       <slot />

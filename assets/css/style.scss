@@ -17,7 +17,7 @@ body {
   font-style: normal;
 }
 
-pre, code {
+pre {
   font-family: "JetBrains Mono", monospace;
 }
 
@@ -91,6 +91,24 @@ input, textarea, select {
 //  border: 1px solid var(--c-sep);
 //  overflow: scroll;
 //}
+
+ul {
+  line-height: 28px;
+  padding-left: 24px;
+
+  ::marker {
+    color: var(--c-sep-accent);
+  }
+}
+
+.code, code {
+  @apply "font-mono";
+  font-size: inherit;
+  background-color: var(--c-bg-card);
+  padding: 1px 2px;
+  border-radius: 0.25rem;
+  border: 1px dashed var(--c-sep);
+}
 
 label {
   @apply "text-gray-5";

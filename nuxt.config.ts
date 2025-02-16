@@ -87,6 +87,13 @@ export default defineNuxtConfig({
   mdc: {
     headings: {
       anchorLinks: false
+    },
+    highlight: false,
+    components: {
+      prose: false,
+      map: {
+        "h2": "ProseH2"
+      }
     }
   },
 

@@ -195,12 +195,15 @@ const linksString = computed({
       </div>
       <div class="form-field">
         <label for="links">Ссылки</label>
-        <TextArea v-model="linksString" id="links" class="font-mono" />
+        <TextArea v-model="linksString" id="links" class="font-mono" placeholder='Формат: "название: ссылка"' />
+        <label for="links">Возможные названия: {{possibleLinks.join(", ")}}</label>
         <span class="error-message" v-if="errors.links">{{ errors.links }}</span>
       </div>
-      <button type="submit" class="mt-4" :disabled="isDisabled">
+
+      <button type="submit" :disabled="isDisabled" class="m-t-4">
         <UButton icon="lucide:save" :inactive="isDisabled" :loading="isSubmitting">Сохранить</UButton>
       </button>
+
     </div>
 
   </form>

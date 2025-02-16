@@ -13,20 +13,20 @@ const loaded = ref(false)
 
 const { checkPerm } = useUserPerms()
 
-onMounted(() => {
-  if (!checkPerm(serverId).value)
-    showError({statusCode: 403, message: "Недостаточно прав."})
-
-  loaded.value = true
-})
+onMounted(() => loaded.value = true)
 </script>
 
 <template>
   <div class="flex flex-col gap-4">
 
-    <UButton icon="lucide:arrow-left" :router-link="`/server/${serverId}`">
-      К странице сервера
-    </UButton>
+    <div class="flex flex-wrap gap-2">
+      <UButton icon="lucide:arrow-left" :router-link="`/server/${serverId}`">
+        К странице сервера
+      </UButton>
+      <UButton icon="lucide:book-open" router-link="/editing-rules">
+        Правила редактирования
+      </UButton>
+    </div>
 
     <ClientOnly v-if="loaded">
       <ServerPageEdit :server-name="serverId" />

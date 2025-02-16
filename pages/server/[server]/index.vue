@@ -15,11 +15,9 @@ const hasPerm = checkPerm(serverId).value
   <div class="flex flex-col gap-4">
 
     <div class="flex flex-wrap gap-2">
-
       <UButton icon="lucide:arrow-left" router-link="/">
         К списку серверов
       </UButton>
-
       <ClientOnly>
         <UButton icon="lucide:file-pen" :router-link="`${useRoute().path}/edit`" v-if="hasPerm">
           Изменить сервер

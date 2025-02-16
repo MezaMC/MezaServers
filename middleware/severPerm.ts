@@ -7,7 +7,6 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
 
     const { checkPerm } = useUserPerms()
 
-    if (!checkPerm(serverId).value) {
-        return navigateTo('/')
-    }
+    if (!checkPerm(serverId).value)
+        showError({statusCode: 403, message: "Недостаточно прав."})
 });
