@@ -9,7 +9,6 @@ const ServerSchema = new mongoose.Schema({
     },
     display: {
         name: String,
-        motds: [String],
         desc: String,
         favicon: String
     },
@@ -19,6 +18,10 @@ const ServerSchema = new mongoose.Schema({
         telegram: String,
         site: String,
         donate: String
+    },
+    desc: {
+        type: String,
+        required: false
     },
     stars: {
         type: [Number],

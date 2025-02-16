@@ -11,25 +11,29 @@ export interface ServerLinks {
     donate?: string | null
 }
 
+export interface ServerDisplay {
+    name?: string | null
+    desc?: string | null
+    favicon?: string | null
+}
+
 export type ServerStatus = "active" | "frozen" | "maintenance"
 
 export interface ServerData {
-    status: ServerStatus,
+    name: string
+    status: ServerStatus
     online?: boolean
     ip: string
     port?: number
-    version?: string,
+    desc?: string
+    version?: string
     players?: {
         online?: number
         max?: number
     },
-    links?: ServerLinks,
-    display: {
-        desc?: string | null,
-        favicon?: string | null,
-        name?: string | null
-    },
-    stars: number[],
+    links?: ServerLinks
+    display: ServerDisplay
+    stars: number[]
     images?: string[]
 }
 
@@ -46,23 +50,24 @@ export async function updateServersData() {
 
             const ip: string = serverEntry.ip
             const name: string = serverEntry.name
-            const port: number = serverEntry.port ?? 25565
+            const port: number | undefined = serverEntry.port ?? undefined
 
             let data: ServerData = {
-                ip: (port == 25565) ? ip : `${ip}:${port}`,
+                name, ip, port,
                 status: serverEntry.status ?? "active",
+                desc: serverEntry.desc ?? undefined,
                 links: serverEntry.links ?? undefined,
                 stars: serverEntry.stars ?? [],
                 display: serverEntry.display ?? {},
                 images: serverEntry.images ?? undefined
             }
             if (data.status === "active") {
-                const { ip: resolvedIp, port: resolvedPort } = await resolveDomain(ip, port)
+                const { ip: resolvedIp, port: resolvedPort } = await resolveDomain(ip, port ?? 25565)
 
                 await pingJava(resolvedIp, { port: resolvedPort, virtualHost: ip, protocolVersion: 769 }).then(resp => {
                     data.online = true
                     data.version = toVersion(resp.version.protocol)
-                    if (!data.display.favicon) data.display.favicon = resp.favicon ?? '/pack.png'
+                    if (!data.display.favicon) data.display.favicon = resp.favicon ?? undefined
                     data.players = {online: resp.players.online, max: resp.players.max}
                 }).catch(() => {
                     data.online = false

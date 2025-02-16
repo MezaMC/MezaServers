@@ -1,16 +1,15 @@
 <script setup lang="ts">
 import {toast} from "vue-sonner";
 import UButton from "~/components/ui/UButton.vue";
-const emit = defineEmits(['updateStars']);
+import {useServerValues} from "~/composables/useServerValues";
 
-const props = defineProps<{
-  stars: Array<number>
-  name: string
-  displayName?: string
-}>()
+const refresh = inject<() => Promise<void>>('refreshFun')!
+const serverData = inject<Ref<ServerData>>("server")!
+
+const { displayName } = useServerValues(serverData)
 
 async function starRequest(act: "add" | "remove") {
-  const resp: any = await $fetch(`/api/server/${props.name}/star`, {
+  const resp: any = await $fetch(`/api/server/${serverData.value.name}/star`, {
     method: 'post',
     body: {act}
   })
@@ -18,11 +17,11 @@ async function starRequest(act: "add" | "remove") {
   if (resp.resp !== "ok") return
 
   if (act == 'add') {
-    toast.success(`Вы поставили звезду серверу ${props.displayName ?? props.name}`)
+    toast.success(`Вы поставили звезду серверу ${displayName.value}`)
   } else {
-    toast.success(`Вы убрали звезду у сервера ${props.displayName ?? props.name}`)
+    toast.success(`Вы убрали звезду у сервера ${displayName.value}`)
   }
-  emit('updateStars')
+  await refresh()
 }
 </script>
 
@@ -33,11 +32,11 @@ async function starRequest(act: "add" | "remove") {
       <template v-if="loggedIn && user?.id">
 
         <UButton
-            v-if="stars.includes(user.id)"
+            v-if="serverData.stars.includes(user.id)"
             icon="tabler:star-filled"
             class="important:(p-l-3 p-r-3)"
             @click="starRequest('remove')">
-          {{ stars.length }}
+          {{ serverData.stars.length }}
         </UButton>
 
         <UButton
@@ -45,7 +44,7 @@ async function starRequest(act: "add" | "remove") {
             icon="tabler:star"
             class="important:(p-l-3 p-r-3)"
             @click="starRequest('add')">
-          {{ stars.length }}
+          {{ serverData.stars.length }}
         </UButton>
 
       </template>
@@ -54,7 +53,7 @@ async function starRequest(act: "add" | "remove") {
           v-else
           icon="tabler:star"
           class="important:(p-l-3 p-r-3 bg-[#00000000] cursor-auto)">
-        {{ stars.length }}
+        {{ serverData.stars.length }}
       </UButton>
 
     </div>

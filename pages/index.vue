@@ -32,7 +32,7 @@ const linksData = [
   <h1 class="m-b-[2rem]">Мистические сервера</h1>
 
   <ClientOnly v-if="loaded">
-    <ServerList />
+    <ServerPageList />
   </ClientOnly>
   <LoaderSpinner v-else />
 

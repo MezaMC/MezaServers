@@ -9,7 +9,7 @@ const props = defineProps<{
   size?: string
   targetBlank?: boolean
   inactive?: boolean
-}>();
+}>()
 
 const slots = useSlots()
 const padding = slots.default ? '0.5rem 0.8rem' : '0.5rem'

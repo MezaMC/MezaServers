@@ -5,16 +5,15 @@ export default defineEventHandler(async (event) => {
 
     const serverName = event.context.params?.server
 
-    if (serverName === undefined) {
-        return {"error": "blank"}
-    }
+    if (serverName === undefined)
+        return {"status": "error", "message": "Имя сервера не может быть пустым"}
 
     const serverData = await useStorage<ServerData>("servers").getItem(serverName)
 
     if (!serverData) {
         throw createError({
             statusCode: 404,
-            statusMessage: 'Server not found',
+            statusMessage: 'Сервер не найден',
         })
     }
 

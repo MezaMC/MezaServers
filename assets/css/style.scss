@@ -17,7 +17,7 @@ body {
   font-style: normal;
 }
 
-pre code {
+pre, code {
   font-family: "JetBrains Mono", monospace;
 }
 
@@ -50,13 +50,22 @@ p {
   @apply "indent-sm";
 }
 
-input {
+.card {
   background: var(--c-bg-card-alt);
-  color: var(--c-text-contrast);
-  font-family: "JetBrains Mono", monospace;
+  color: var(--c-text-primary);
+  font-size: 16px;
+  border-radius: 0.5rem;
+  font-family: inherit;
   border: 1px solid var(--c-sep);
-  padding: 4px 8px;
+  box-sizing: border-box;
+}
+
+input, textarea, select {
+  @extend .card;
+  color: var(--c-text-contrast);
   border-radius: 0.25rem;
+  padding: 8px 10px;
+  min-width: 0;
   &:focus {
     outline: none;
     border: 1px solid var(--c-sep-accent);
@@ -73,6 +82,25 @@ input {
   }
 }
 
+//pre {
+//  padding: 10px 12px;
+//  background: var(--c-bg-card-alt);
+//  font-family: "JetBrains Mono", monospace;
+//  font-size: 14px;
+//  border-radius: 0.25rem;
+//  border: 1px solid var(--c-sep);
+//  overflow: scroll;
+//}
+
+label {
+  @apply "text-gray-5";
+  font-size: 14px;
+}
+
 button {
+  all: unset;
+}
+
+.unstyled {
   all: unset;
 }

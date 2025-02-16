@@ -1,9 +1,5 @@
 <script setup lang="ts">
-import type {ServerLinks} from "~/server/utils/servers";
-
-const props = defineProps<{
-  links?: ServerLinks
-}>();
+const serverData = inject<Ref<ServerData>>("server")!
 
 const displayData: {
   [key: string]: {
@@ -35,8 +31,8 @@ const displayData: {
 </script>
 
 <template>
-  <div class="flex items-center flex-wrap gap-[0.5rem_1.25rem]" v-if="links">
-    <template v-for="(link, linkName) of links">
+  <div class="flex items-center flex-wrap gap-[0.5rem_1.25rem]" v-if="serverData.links">
+    <template v-for="(link, linkName) of serverData.links">
 
       <a v-if="link && linkName in displayData" :href="link" target="_blank"
          class="cursor-pointer flex items-center gap-1">

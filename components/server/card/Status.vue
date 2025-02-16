@@ -1,34 +1,32 @@
 <script setup lang="ts">
 import type {ServerData} from "~/server/utils/servers";
 
-const props = defineProps<{
-  data: ServerData
-}>()
+const serverData = inject<Ref<ServerData>>("server")!
 </script>
 
 <template >
 
   <div class="flex gap-2.5 items-center">
 
-    <template v-if="data.status === 'maintenance'">
+    <template v-if="serverData.status === 'maintenance'">
       <div class="bg-blue-5 shadow-blue-6 indicator" />
       <span class="text-t-secondary">Технические работы</span>
     </template>
 
-    <template v-else-if="data.status === 'frozen'">
+    <template v-else-if="serverData.status === 'frozen'">
       <div class="bg-gray-5 shadow-gray-6 indicator" />
       <span class="text-t-secondary">Временно заморожен</span>
     </template>
 
-    <template v-else-if="data.online === true">
+    <template v-else-if="serverData.online === true">
       <div class="bg-green shadow-green indicator" />
-      <span v-if="data.players?.online !== undefined && data.players?.max !== undefined" class="flex gap-1">
+      <span v-if="serverData.players?.online !== undefined && serverData.players?.max !== undefined" class="flex gap-1">
         <span class="text-t-secondary">Онлайн:</span>
-        <span class="flex gap-0.5">{{ data.players.online }}<span class="text-t-secondary">/</span>{{ data.players.max }}</span>
+        <span class="flex gap-0.5">{{ serverData.players.online }}<span class="text-t-secondary">/</span>{{ serverData.players.max }}</span>
       </span>
-      <template v-if="data.version !== undefined">
+      <template v-if="serverData.version !== undefined">
         <div class="w-[1px] h-4 bg-sep" />
-        <span class="flex gap-1"><span class="lt-phone:hidden text-t-secondary">Версия:</span> {{ data.version }}</span>
+        <span class="flex gap-1"><span class="lt-phone:hidden text-t-secondary">Версия:</span> {{ serverData.version }}</span>
       </template>
     </template>
 

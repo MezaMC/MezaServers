@@ -1,8 +1,7 @@
 <script setup lang="ts">
-
-import GithubCard from "~/components/ui/GithubCard.vue";
-import UButton from "~/components/ui/UButton.vue";
-import {toast} from "vue-sonner";
+import GithubCard from "~/components/ui/GithubCard.vue"
+import UButton from "~/components/ui/UButton.vue"
+import {toast} from "vue-sonner"
 
 const props = defineProps<{
   perms: string[]
@@ -53,7 +52,7 @@ const editPerm = async () => {
 <template>
   <form class="bg-bg-card border-(1 solid sep) rounded-2 flex gap-4 items-center p-2 lt-sm:(flex-col p-4)" @submit.prevent="editPerm" >
     <GithubCard :github_id :show-id="true" />
-    <input v-model="permsString" class="flex-grow-1 min-w-0 w-full" />
+    <input v-model="permsString" class="flex-grow-1 min-w-0 w-full font-mono" />
     <div class="flex gap-2">
       <button type="submit">
         <UButton icon="lucide:save" :inactive="permsString == initPermsString" />
@@ -62,7 +61,3 @@ const editPerm = async () => {
     </div>
   </form>
 </template>
-
-<style scoped lang="scss">
-
-</style>

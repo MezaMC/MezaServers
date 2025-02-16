@@ -14,11 +14,18 @@ export default defineNuxtConfig({
     '@nuxtjs/sitemap',
     'nuxt-seo-utils',
     '@nuxt/eslint',
+    '@vee-validate/nuxt',
+    '@nuxtjs/mdc'
   ],
 
   site: {
     name: packageJson.displayName,
     url: 'servers.meza.one',
+  },
+
+  veeValidate: {
+    // disable or enable auto imports
+    autoImports: true,
   },
 
   // Rendering options
@@ -77,6 +84,12 @@ export default defineNuxtConfig({
 
   icon: { componentName: 'NuxtIcon' },
 
+  mdc: {
+    headings: {
+      anchorLinks: false
+    }
+  },
+
   // Environment variables
   runtimeConfig: {
     MONGODB_URI: process.env.NUXT_MONGODB_URI,
@@ -89,6 +102,7 @@ export default defineNuxtConfig({
         clientSecret: process.env.NUXT_OAUTH_GITHUB_CLIENT_SECRET
       }
     },
+    edits_webhook: process.env.NUXT_DISCORD_WEBHOOK,
     public: {
       VER: `v${packageJson.version}`,
       LABEL: packageJson.displayName

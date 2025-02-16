@@ -47,8 +47,8 @@ const addFormData = ref({
     />
 
     <form class="flex gap-2 w-full" @submit.prevent="addPerm()">
-      <input type="number" placeholder="GitHub ID" required v-model="addFormData.github_id">
-      <input placeholder="Права через запятую" class="flex-grow-1" required v-model="addFormData.perms">
+      <input type="number" placeholder="GitHub ID" required v-model="addFormData.github_id" class="font-mono w-30">
+      <input placeholder="Права через запятую" class="flex-grow-1 font-mono" required v-model="addFormData.perms">
       <button type="submit">
         <UButton type="outline" icon="lucide:user-plus" :inactive="!(addFormData.perms && addFormData.github_id)">Создать</UButton>
       </button>

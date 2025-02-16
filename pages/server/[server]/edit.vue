@@ -2,6 +2,8 @@
 import UButton from "~/components/ui/UButton.vue"
 import LoaderSpinner from "~/components/ui/LoaderSpinner.vue"
 
+useSeoMeta({ title: "Изменение сервера" })
+
 definePageMeta({
   middleware: 'sever-perm'
 })
@@ -23,7 +25,7 @@ const hasPerm = checkPerm(serverId).value
     </UButton>
 
     <ClientOnly v-if="loaded">
-      <ServerEditPage :server-name="serverId" />
+      <ServerPageEdit :server-name="serverId" />
     </ClientOnly>
     <LoaderSpinner v-else />
 

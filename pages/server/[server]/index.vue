@@ -20,14 +20,16 @@ const hasPerm = checkPerm(serverId).value
         К списку серверов
       </UButton>
 
-      <UButton icon="lucide:file-pen" :router-link="`${useRoute().path}/edit`" v-if="hasPerm">
-        Изменить сервер
-      </UButton>
+      <ClientOnly>
+        <UButton icon="lucide:file-pen" :router-link="`${useRoute().path}/edit`" v-if="hasPerm">
+          Изменить сервер
+        </UButton>
+      </ClientOnly>
 
     </div>
 
     <ClientOnly v-if="loaded">
-        <ServerViewPage :server-name="serverId" />
+      <ServerPageView :server-name="serverId" />
     </ClientOnly>
     <LoaderSpinner v-else />
 

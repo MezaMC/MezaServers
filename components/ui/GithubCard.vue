@@ -32,12 +32,8 @@ onMounted(updateData)
 
     <div class="flex flex-col gap-1">
       <b>{{ userData.login }}</b>
-      <pre v-if="showId" class="m-0">ID: {{ github_id }}</pre>
+      <pre v-if="showId" class="m-0 text-12px text-t-secondary">ID: {{ github_id }}</pre>
     </div>
   </div>
   <pre v-else class="m-l-2 text-[16px]">{{ github_id }}</pre>
 </template>
-
-<style scoped lang="scss">
-
-</style>

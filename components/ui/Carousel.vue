@@ -27,8 +27,8 @@ onMounted(() => {
 
 <template>
   <div
-      class="flex flex-row gap-3 lt-sm:gap-0 items-center bg-bg-cardalt h-45vw max-h-100
-      border-(1px solid sep) p-3 lt-sm:p-0 justify-between rounded-2 w-full box-border"
+      class="flex flex-row gap-2 lt-sm:gap-0 items-center card h-45vw max-h-100
+      p-2 lt-sm:p-0 justify-between w-full"
   >
 
     <button @click="emblaApi?.scrollPrev()" :disabled="!canScrollPrev">

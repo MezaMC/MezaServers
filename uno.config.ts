@@ -7,6 +7,10 @@ import {
 export default defineConfig({
     // ...UnoCSS options
 
+    rules: [
+        ["font-mono", {"font-family": `"JetBrains Mono", monospace`}]
+    ],
+
     theme: {
         breakpoints: {
             'phone': '440px',
