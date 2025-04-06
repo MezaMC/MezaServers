@@ -13,7 +13,7 @@ const { address, displayName, route } = useServerValues(serverData)
 
       <!-- Иконка 64x64 -->
       <RouterLink class="w-64px h-64px" :to="route">
-        <img :src="serverData.display?.favicon || '/pack.png'" alt="server icon"
+        <img :src="serverData.display?.favicon || serverData.display?.faviconData || '/pack.png'" alt="server icon"
              width="64" height="64"
         />
       </RouterLink>

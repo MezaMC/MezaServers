@@ -12,9 +12,10 @@ export interface ServerLinks {
 }
 
 export interface ServerDisplay {
-    name?: string | null
-    desc?: string | null
-    favicon?: string | null
+    name?: string
+    desc?: string
+    faviconData?: string
+    favicon?: string
 }
 
 export type ServerStatus = "active" | "frozen" | "maintenance"
@@ -89,18 +90,22 @@ async function fetchServerData(serverName: string, timeout: number): Promise<Ser
             desc: serverEntry.desc ?? undefined,
             links: serverEntry.links ?? undefined,
             stars: serverEntry.stars ?? [],
-            display: serverEntry.display ?? {},
+            display: {
+                name: serverEntry.display?.name ?? undefined,
+                desc: serverEntry.display?.desc ?? undefined,
+                favicon: serverEntry.display?.favicon ?? undefined
+            },
             images: serverEntry.images ?? undefined
         }
 
-        // If server is active resolve adress then ping
+        // If server is active resolve address then ping
         if (serverData.status === "active") {
             const { ip: resolvedIp, port: resolvedPort } = await resolveDomain(ip, port ?? 25565)
 
             await pingJava(resolvedIp, { port: resolvedPort, virtualHost: ip, protocolVersion: 769, timeout }).then(resp => {
                 serverData.online = true
                 serverData.version = toVersion(resp.version.protocol)
-                if (!serverData.display.favicon) serverData.display.favicon = resp.favicon ?? undefined
+                if (!serverData.display.favicon) serverData.display.faviconData = resp.favicon
                 serverData.players = {online: resp.players.online, max: resp.players.max}
             }).catch(() => {
                 serverData.online = false
