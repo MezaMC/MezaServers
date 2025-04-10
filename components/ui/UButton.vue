@@ -62,7 +62,7 @@ div {
 .type-outline {
   --opacity-outline: 0.3;
   --opacity-bg: 0.03;
-  border: 1px solid rgba(var(--color), var(--opacity-outline));
+  outline: 1px solid rgba(var(--color), var(--opacity-outline));
   background-color: rgba(var(--color), var(--opacity-bg));
 
   &:hover {

@@ -51,17 +51,31 @@ const serversDataSorted = computed(() => {
   return Object.entries(serversData.value ?? {})
       .sort(compareFunctions[sortType.value])
 })
+
+const sortOpen = ref(false)
 </script>
 
 <template>
 
-  <div class="flex items-center gap-3 m-[1rem_0]">
-    <b class="text-md">Сортировка:</b>
-    <UButton @click="sortType = 'online'" icon="lucide:chart-no-axes-column" :type="sortType == 'online' ? 'outline' : 'link'">По онлайну</UButton>
-    <UButton @click="sortType = 'stars'" icon="lucide:sparkles" :type="sortType == 'stars' ? 'outline' : 'link'">По звёздам</UButton>
+  <div class="sort-settings flex flex-col gap-2 m-b-[1.5rem]">
+    <span class="text-t-secondary" @click="sortOpen = !sortOpen">Сортировка <span class="font-mono">{{ sortOpen ? "▾" : "▸"  }}</span></span>
+
+    <div class="flex gap-2 lt-phone:flex-col" v-if="sortOpen">
+      <UButton
+          @click="sortType = 'online'"
+          icon="lucide:chart-no-axes-column"
+          :type="sortType == 'online' ? 'outline' : 'link'"
+      >По онлайну</UButton>
+      <UButton
+          @click="sortType = 'stars'"
+          icon="lucide:sparkles"
+          :type="sortType == 'stars' ? 'outline' : 'link'"
+      >По звёздам</UButton>
+    </div>
+
   </div>
 
-  <transition-group tag="div" class="flex flex-col gap-8" name="flip" v-if="status == 'success' || serversData">
+  <transition-group tag="div" class="flex flex-col gap-8" name="flip" v-if="status == 'success' || serversData" :key="sortType">
     <ServerContext :server-data="serverData" :key="serverName" v-for="[serverName, serverData] of serversDataSorted">
       <ServerCardRoot />
     </ServerContext>
@@ -71,8 +85,21 @@ const serversDataSorted = computed(() => {
 
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .flip-move {
   transition: transform 300ms ease-in-out;
 }
+
+.sort-settings {
+  .open-indicator {
+    display: inline-block;
+    margin-left: .5rem;
+    transition: 150ms ease-in-out all;
+    &.open {
+      transform: rotate(90deg);
+    }
+  }
+
+}
+
 </style>
