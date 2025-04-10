@@ -29,7 +29,7 @@ const linksData = [
 
 <template>
 
-  <h1 class="m-b-[2rem]">Мистические сервера</h1>
+  <h1 class="m-b-0">Мистические сервера</h1>
 
   <ClientOnly v-if="loaded">
     <ServerPageList />
