@@ -2,16 +2,16 @@
 import UButton from "~/components/ui/UButton.vue"
 import LoaderSpinner from "~/components/ui/LoaderSpinner.vue"
 
-useSeoMeta({ title: "Изменение сервера" })
+useSeoMeta({
+  title: "Изменение сервера"
+})
 
 definePageMeta({
-  middleware: 'sever-perm'
+  middleware: 'server-perm'
 })
 
 const serverId = useRoute().params.server as string
 const loaded = ref(false)
-
-const { checkPerm } = useUserPerms()
 
 onMounted(() => loaded.value = true)
 </script>

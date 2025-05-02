@@ -25,7 +25,7 @@ onMounted(() => {
 
 const updateServerData = async () => {
   await refresh()
-  clearNuxtData('serversData')
+  clearNuxtState('serversData')
 }
 
 provide<() => Promise<void>>('refreshFun', updateServerData)

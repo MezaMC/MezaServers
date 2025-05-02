@@ -6,16 +6,16 @@ import UButton from "~/components/ui/UButton.vue";
 
 type ServersDataType = { [name: string]: ServerData }
 
-const { data: serversDataCached } = useNuxtData<ServersDataType>("serversData")
+const serversDataState = useState<ServersDataType>("serversData")
 
 const { data: serversData, status, refresh } = await useFetch<ServersDataType>('/api/servers', {
-  key: "serversData",
-  immediate: !serversDataCached?.value
+  key: 'serversData',
+  onResponse: resp => serversDataState.value ??= resp.response?._data,
+  default: () => serversDataState.value,
+  immediate: !serversDataState.value
 })
 
 provide<() => Promise<void>>('refreshFun', refresh)
-
-onMounted(() => serversData.value ??= serversDataCached?.value)
 
 // Compare only by stars
 function compareStarsFun(

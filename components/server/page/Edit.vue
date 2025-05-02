@@ -18,7 +18,7 @@ const { data: serverData, refresh } = await useFetch<ServerData>(`/api/server/${
 
 const updateServerData = async () => {
   await refresh()
-  clearNuxtData('serversData')
+  clearNuxtState('serversData')
 }
 
 provide<() => Promise<void>>('refreshFun', updateServerData)
