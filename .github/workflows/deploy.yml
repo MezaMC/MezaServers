@@ -49,4 +49,4 @@ jobs:
 
       - name: Remove SSH files
         run: |
-          rm ~/.ssh/id_rsa
+          rm ~/.ssh/id_ed25519
